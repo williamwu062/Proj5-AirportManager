@@ -14,6 +14,6 @@ public class Passenger {
 	}
 
 	public void addBoardingPass() {
-
+		//TODO create a boarding pass
 	}
 }
