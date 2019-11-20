@@ -19,7 +19,7 @@ public class ReservationServer {
 			while (true) {
 				Socket s = socket.accept();
 
-				Thread t = new Thread(new ReservationClient(s));
+				Thread t = new Thread(new ReservationRequestHandler(s));
 
 				t.start();
 			}
