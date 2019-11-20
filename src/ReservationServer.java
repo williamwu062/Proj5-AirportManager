@@ -8,9 +8,9 @@ public class ReservationServer {
 	public static int dSeats = 100;
 	public static int aSeats = 100;
 
-	public static Passenger[] swPassengers;
-	public static Passenger[] dPassengers;
-	public static Passenger[] aPassengers;
+	public static Passenger[] swPassengers = new Passenger[swSeats];
+	public static Passenger[] dPassengers = new Passenger[dSeats];
+	public static Passenger[] aPassengers = new Passenger[aSeats];
 
 	public static void main(String[] args) {
 		try {
