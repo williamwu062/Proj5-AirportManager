@@ -44,6 +44,6 @@ public class Alaska implements Airline {
     }
 
     public String toString() {
-
+        return "";
     }
 }
