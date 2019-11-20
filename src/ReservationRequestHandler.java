@@ -30,7 +30,7 @@ public class ReservationRequestHandler implements Runnable{
         JFrame stage2 = new JFrame("Purdue Airline Reservation System");
         JPanel panelStage2 = new JPanel();
         JLabel welcome = new JLabel("Welcome to Purdue University Airline Reservation Management System!");
-        JLabel imageWelcome = new JLabel(new ImageIcon("C:/Users/Benjamin_Zhu/Desktop/School/CS180/CS180PJ/CS180PJ%-actual/Images/Purdue_Boilermakers_logo.svg.png"));
+        JLabel imageWelcome = new JLabel(new ImageIcon("Images/Purdue_Boilermakers_logo.svg.png"));
         stage2.setSize(900,600);
         stage2.setLayout(new FlowLayout());
         panelStage2.add(welcome);
