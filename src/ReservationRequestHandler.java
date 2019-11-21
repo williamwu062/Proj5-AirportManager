@@ -27,17 +27,64 @@ public class ReservationRequestHandler implements Runnable{
     /**
      * Handles the requests of the client connected to this request handler's client socket.
      */
-    @Override
-    public void run() {
+    public void stage2() {
         JFrame stage2 = new JFrame("Purdue Airline Reservation System");
         JPanel panelStage2 = new JPanel();
         JLabel welcome = new JLabel("Welcome to Purdue University Airline Reservation Management System!");
+<<<<<<< HEAD
+        JLabel imageWelcome = new JLabel(new ImageIcon("C:/Users/Benjamin_Zhu/Desktop/School/CS180/CS180PJ/CS180PJ%-actual/Images/Purdue_Boilermakers_logo.svg.png"));
+        JButton exit = new JButton("Exit");
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                stage8();
+            }
+        });
+        JButton BookAFlight = new JButton("Book a Flight");
+        BookAFlight.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                stage3();
+            }
+        });
+=======
         JLabel imageWelcome = new JLabel(new ImageIcon("Images/Purdue_Boilermakers_logo.svg.png"));
+>>>>>>> 7e5cd879224340e1cc9df16842a291569f718f11
         stage2.setSize(900,600);
         stage2.setLayout(new FlowLayout());
         panelStage2.add(welcome);
-        panelStage2.add(imageWelcome);
+        panelStage2.add(imageWelcome, BorderLayout.CENTER);
+        stage2.add(panelStage2);
+        stage2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        stage2.setVisible(true);
+    }
 
+    public void stage3() {
+
+    }
+
+    public void stage4() {
+
+    }
+
+    public void stage5() {
+
+    }
+
+    public void stage6() {
+
+    }
+
+    public void stage7() {
+
+    }
+
+    public void stage8() {
+
+    }
+    @Override
+    public void run() {
+        stage2();
     } //run
 
     /**
