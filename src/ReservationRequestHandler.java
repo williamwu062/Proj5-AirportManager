@@ -30,16 +30,6 @@ public class ReservationRequestHandler implements Runnable {
 	public ReservationRequestHandler(Socket clientSocket) throws NullPointerException {
 		Objects.requireNonNull(clientSocket, "the specified client socket is null");
 		this.clientSocket = clientSocket;
-		frame = new JFrame("Purdue University Flight Reservation System");
-		layout = new CardLayout();
-		mainPanel = new JPanel(layout);
-
-		stage_0();
-
-		frame.add(mainPanel);
-		frame.setSize(900, 600);
-		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		frame.setVisible(true);
 	} //CensoringRequestHandler
 
 	/**
@@ -103,7 +93,33 @@ public class ReservationRequestHandler implements Runnable {
 	}
 
 	public void stage_2() {
+		JPanel panel = new JPanel();
+		JLabel title = new JLabel("Choose a Flight");
+		panel.add(title);
+		String[] airlineNames = {"Alaska", "Delta", "Southwest"}; //TODO maybe change to getName from Airline
+		JComboBox airlines = new JComboBox(airlineNames);
+		panel.add(airlines);
+		JButton exit = new JButton("No");
+		panel.add(exit);
+		JButton next = new JButton("Choose this flight");
+		panel.add(next);
 
+		exit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stage_7();
+			}
+		});
+
+		next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stage_3();
+			}
+		});
+
+		mainPanel.add(panel, "2");
+		layout.show(mainPanel, "2");
 	}
 
 	public void stage_3() {
@@ -128,7 +144,16 @@ public class ReservationRequestHandler implements Runnable {
 
 	@Override
 	public void run() {
+		frame = new JFrame("Purdue University Flight Reservation System");
+		layout = new CardLayout();
+		mainPanel = new JPanel(layout);
 
+		stage_0();
+
+		frame.add(mainPanel);
+		frame.setSize(900, 600);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		frame.setVisible(true);
 	} //run
 
 	/**
