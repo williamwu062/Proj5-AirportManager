@@ -18,5 +18,9 @@ public class BoardingPass {
 		this.age = age;
 	}
 
+
+	public void addBoardingPass() {
+		//TODO create a boarding pass
+	}
 	//TODO need to add flight and flight number
 }

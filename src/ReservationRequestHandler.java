@@ -2,15 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.Objects;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
 
 public class ReservationRequestHandler implements Runnable {
 	/**
@@ -20,6 +17,7 @@ public class ReservationRequestHandler implements Runnable {
 	private JFrame frame;
 	private JPanel mainPanel;
 	private CardLayout layout;
+	private String whichAirline;
 
 	/**
 	 * Initializes fields.
@@ -37,12 +35,26 @@ public class ReservationRequestHandler implements Runnable {
 	 */
 	public void stage_0() {
 		JPanel panel = new JPanel();
+		panel.setSize(500, 500);
+		JPanel panelStage0Text = new JPanel();
+		panelStage0Text.setSize(new Dimension(500, 100));
+		JPanel panelStage0Image = new JPanel();
+		panelStage0Image.setSize(new Dimension(500, 300));
+		JPanel panelStage0Buttons = new JPanel();
+		panelStage0Buttons.setPreferredSize(new Dimension(500, 100));
 		JLabel welcome = new JLabel("Welcome to Purdue University Airline Reservation Management System!");
-		panel.add(welcome);
+		panelStage0Text.add(welcome);
+		JLabel imageWelcome = new JLabel(new ImageIcon(
+				(new ImageIcon("Images/Purdue_Boilermakers_logo.svg.png")).getImage().getScaledInstance
+						(400, 300, 4)));
+		panelStage0Image.add(imageWelcome);
 		JButton exit = new JButton("Exit");
-		panel.add(exit);
+		panelStage0Buttons.add(exit);
 		JButton next = new JButton("Book a Flight");
-		panel.add(next);
+		panelStage0Buttons.add(next);
+		panel.add(panelStage0Text, BorderLayout.CENTER);
+		panel.add(panelStage0Image, BorderLayout.CENTER);
+		panel.add(panelStage0Buttons, BorderLayout.CENTER);
 
 		exit.addActionListener(new ActionListener() {
 			@Override
@@ -61,8 +73,37 @@ public class ReservationRequestHandler implements Runnable {
 		mainPanel.add(panel, "0");
 		layout.show(mainPanel, "0");
 
-		//JLabel imageWelcome = new JLabel(new ImageIcon("Images/Purdue_Boilermakers_logo.svg.png"));
-		//panelStage2.add(imageWelcome, BorderLayout.CENTER);
+		/*JFrame stage2 = new JFrame("Purdue Airline Reservation System");
+		JPanel panelStage2Text = new JPanel();
+		panelStage2Text.setSize(500, 100);
+		JPanel panelStage2Image = new JPanel();
+		panelStage2Image.setSize(500, 300);
+		JPanel panelStage2Buttons = new JPanel();
+		panelStage2Buttons.setSize(500, 100);
+		JLabel welcome = new JLabel("Welcome to Purdue University Airline Reservation Management System!");
+		welcome.setFont(new Font("Serif", 0, 15));
+		JLabel imageWelcome = new JLabel(new ImageIcon((new ImageIcon("Images/Purdue_Boilermakers_logo.svg.png")).getImage().getScaledInstance(400, 300, 4)));
+		JButton exit = new JButton("Exit");
+		exit.setSize(199, 50);
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
+				ReservationRequestHandler.this.stage8();
+			}
+		});
+		JButton bookAFlight = new JButton("Book a Flight");
+		bookAFlight.setSize(100, 50);
+		bookAFlight.addActionListener(new 2(this));
+		stage2.setSize(500, 400);
+		stage2.setLayout(new FlowLayout());
+		panelStage2Text.add(welcome);
+		panelStage2Image.add(imageWelcome, "Center");
+		panelStage2Buttons.add(bookAFlight, "Center");
+		panelStage2Buttons.add(exit, "Center");
+		stage2.add(panelStage2Text);
+		stage2.add(panelStage2Image);
+		stage2.add(panelStage2Buttons);
+		stage2.setDefaultCloseOperation(3);
+		stage2.setVisible(true);*/
 	}
 
 	public void stage_1() {
@@ -151,7 +192,7 @@ public class ReservationRequestHandler implements Runnable {
 		stage_0();
 
 		frame.add(mainPanel);
-		frame.setSize(900, 600);
+		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 	} //run
