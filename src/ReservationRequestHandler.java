@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.lang.reflect.Array;
 import java.net.Socket;
 import java.util.Set;
@@ -20,6 +22,7 @@ public class ReservationRequestHandler implements Runnable {
 	private JFrame frame;
 	private JPanel mainPanel;
 	private CardLayout layout;
+	private String whichAirline;
 
 	/**
 	 * Initializes fields.
@@ -103,6 +106,23 @@ public class ReservationRequestHandler implements Runnable {
 		panel.add(exit);
 		JButton next = new JButton("Choose this flight");
 		panel.add(next);
+
+
+		String[] paragraphs = new String[3];
+		paragraphs[0] = "Gummy bears flying";
+		paragraphs[1] = "How much food is this";
+		paragraphs[2] = "I cannot believe you ate this much sushi";
+		//JPanel wordPanel = new JPanel(); TODO shall i do this doe. IF needed when formatting the GUI
+		JLabel mainParagaph = new JLabel(paragraphs[0]);
+		panel.add(mainParagaph);
+		airlines.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					mainParagaph.setText(paragraphs[airlines.getSelectedIndex()]);
+				}
+			}
+		});
 
 		exit.addActionListener(new ActionListener() {
 			@Override
