@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,28 +30,41 @@ public class ReservationRequestHandler implements Runnable{
      */
     public void stage2() {
         JFrame stage2 = new JFrame("Purdue Airline Reservation System");
-        JPanel panelStage2 = new JPanel();
+        JPanel panelStage2Text = new JPanel();
+        panelStage2Text.setSize(500,100);
+        JPanel panelStage2Image = new JPanel();
+        panelStage2Image.setSize(500,300);
+        JPanel panelStage2Buttons = new JPanel();
+        panelStage2Buttons.setSize(500,100);
         JLabel welcome = new JLabel("Welcome to Purdue University Airline Reservation Management System!");
-        JLabel imageWelcome = new JLabel(new ImageIcon("Images/Purdue_Boilermakers_logo.svg.png"));
+        welcome.setFont(new Font("Serif", Font.PLAIN, 15));
+        JLabel imageWelcome = new JLabel(new ImageIcon(((new ImageIcon
+                ("Images/Purdue_Boilermakers_logo.svg.png")).getImage()).getScaledInstance(400,300 , Image.SCALE_SMOOTH)));
         JButton exit = new JButton("Exit");
+        exit.setSize(199,50);
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 stage8();
             }
         });
-        JButton BookAFlight = new JButton("Book a Flight");
-        BookAFlight.addActionListener(new ActionListener() {
+        JButton bookAFlight = new JButton("Book a Flight");
+        bookAFlight.setSize(100, 50);
+        bookAFlight.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 stage3();
             }
         });
-        stage2.setSize(900,600);
+        stage2.setSize(500,500);
         stage2.setLayout(new FlowLayout());
-        panelStage2.add(welcome);
-        panelStage2.add(imageWelcome, BorderLayout.CENTER);
-        stage2.add(panelStage2);
+        panelStage2Text.add(welcome);
+        panelStage2Image.add(imageWelcome, BorderLayout.CENTER);
+        panelStage2Buttons.add(bookAFlight, BorderLayout.CENTER);
+        panelStage2Buttons.add(exit, BorderLayout.CENTER);
+        stage2.add(panelStage2Text);
+        stage2.add(panelStage2Image);
+        stage2.add(panelStage2Buttons);
         stage2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         stage2.setVisible(true);
     }

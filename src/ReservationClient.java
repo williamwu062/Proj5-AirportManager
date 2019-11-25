@@ -35,14 +35,11 @@ public final class ReservationClient {
 
 				System.out.println("Goodbye!");
 			} else {
-				System.out.print("Enter the sever's port: ");
-
 				portString = JOptionPane.showInputDialog(null, "What is the port you'd like to connect to? ",
 						"hostName?", JOptionPane.QUESTION_MESSAGE);
 
 				if (portString == null) {
 					System.out.println();
-
 					System.out.println("Goodbye!");
 				} else if (!isParsable(portString)) {
 					System.out.println();
@@ -56,11 +53,7 @@ public final class ReservationClient {
 					socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
 					socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-
-					System.out.println();
-
-					System.out.println("Goodbye!");
+					System.out.println("Connection successful");
 				} //end if
 			} //end if
 		} catch (IOException e) {
