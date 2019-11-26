@@ -1,49 +1,44 @@
 import java.net.PasswordAuthentication;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Alaska implements Airline {
-    private String description;
-    private Passenger[] passengers;
-    private String name;
+	public static final String description = "<html>Alaska Airlines is proud to serve the strong and knowledgeable " +
+					"Boilermakers from Purdue University.<br>We primarily fly westward and often have stops in " +
+					"Alaska and California.<br>We have first class amenities, even in the Coach class.<br>We provide " +
+					"fun snacks, such as pretzels and goldfish.<br>We also have comfortable seats, and free " +
+					"WiFi.<br>We hope you choose Alaska Airlines for your next itinerary!</html>";
+	public static final String name = "Alaska";
+	private ArrayList<Passenger> passengers;
 
-    public Alaska(String name, Passenger[] passengers, String description) throws NullPointerException {
-        if(name == null || passengers == null || description == null) {
-            throw new NullPointerException();
-        }
-        this.name = name;
-        this.passengers = passengers;
-        this.description = description;
-    }
+	public Alaska(ArrayList<Passenger> passengers) throws NullPointerException {
+		this.passengers = passengers;
 
-    public String getDescription() {
-        return description;
-    }
+		if (passengers == null) {
+			throw new NullPointerException();
+		}
+	}
 
-    public Passenger[] getPassengers() {
-        return passengers;
-    }
+	public ArrayList<Passenger> getPassengers() {
+		return passengers;
+	}
 
-    @Override
-    public String getName() {
-        return name;
-    }
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void addPassenger(Passenger passenger) {
+		passengers.add(passenger);
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Alaska alaska = (Alaska) o;
-        return Objects.equals(description, alaska.description) &&
-                Arrays.equals(passengers, alaska.passengers) &&
-                Objects.equals(name, alaska.name);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Alaska alaska = (Alaska) o;
+		return Objects.equals(description, alaska.description) &&
+						passengers.equals(alaska.passengers) &&
+						Objects.equals(name, alaska.name);
+	}
 
-    public String toString() {
-        return "";
-    }
+	public String toString() {
+		return "";
+	}
 }

@@ -22,7 +22,7 @@ public class ReservationRequestHandler implements Runnable {
 	private JFrame frame;
 	private JPanel mainPanel;
 	private CardLayout layout;
-	private String whichAirline;
+	private Airline airlineChoice;
 
 	/**
 	 * Initializes fields.
@@ -106,7 +106,6 @@ public class ReservationRequestHandler implements Runnable {
 		panel.add(exit);
 		JButton next = new JButton("Choose this flight");
 		panel.add(next);
-
 
 		String[] paragraphs = new String[3];
 		paragraphs[0] = "Gummy bears flying";

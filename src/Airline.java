@@ -1,7 +1,9 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public interface Airline extends Serializable {
-    public String getName();
+	public ArrayList<Passenger> getPassengers();
 
-    public void setName(String name) throws NullPointerException;
+	public void addPassenger(Passenger passenger);
 }
+
