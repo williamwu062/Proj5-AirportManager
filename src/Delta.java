@@ -7,6 +7,7 @@ public class Delta implements Airline {
 					"carrier get additional benefits.<br>We are also happy to offer power outlets in each seat " +
 					"for passenger use.<br>We hope you choose to fly Delta at your next airline.</html>";
 	public static final String name = "Delta";
+	public static int dSeats = 100;
 	private ArrayList<Passenger> passengers;
 
 	public Delta(ArrayList<Passenger> passengers) throws NullPointerException {

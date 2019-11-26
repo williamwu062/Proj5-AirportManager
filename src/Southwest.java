@@ -6,6 +6,7 @@ public class Southwest implements Airline {
 					"refreshments.<br>Additionally, Southwest flights offer two free checked bags and " +
 					"predominately cheap flights.<br>We hope you choose Southwest for your next flight.</html>";
 	public static final String name = "Southwest";
+	public static int swSeats = 100;
 	private ArrayList<Passenger> passengers;
 
 	public Southwest(ArrayList<Passenger> passengers) throws NullPointerException {

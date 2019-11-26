@@ -10,6 +10,7 @@ public class Alaska implements Airline {
 					"fun snacks, such as pretzels and goldfish.<br>We also have comfortable seats, and free " +
 					"WiFi.<br>We hope you choose Alaska Airlines for your next itinerary!</html>";
 	public static final String name = "Alaska";
+	public static int aSeats = 100;
 	private ArrayList<Passenger> passengers;
 
 	public Alaska(ArrayList<Passenger> passengers) throws NullPointerException {

@@ -6,6 +6,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.lang.reflect.Array;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.Objects;
 import java.io.BufferedReader;
@@ -99,7 +100,7 @@ public class ReservationRequestHandler implements Runnable {
 		JPanel panel = new JPanel();
 		JLabel title = new JLabel("Choose a Flight");
 		panel.add(title);
-		String[] airlineNames = {"Alaska", "Delta", "Southwest"}; //TODO maybe change to getName from Airline
+		String[] airlineNames = {Alaska.name, Delta.name, Southwest.name}; //TODO maybe change to getName from Airline
 		JComboBox airlines = new JComboBox(airlineNames);
 		panel.add(airlines);
 		JButton exit = new JButton("No");
@@ -107,18 +108,15 @@ public class ReservationRequestHandler implements Runnable {
 		JButton next = new JButton("Choose this flight");
 		panel.add(next);
 
-		String[] paragraphs = new String[3];
-		paragraphs[0] = "Gummy bears flying";
-		paragraphs[1] = "How much food is this";
-		paragraphs[2] = "I cannot believe you ate this much sushi";
+		String[] descriptions = {Alaska.description, Delta.description, Southwest.description};
 		//JPanel wordPanel = new JPanel(); TODO shall i do this doe. IF needed when formatting the GUI
-		JLabel mainParagaph = new JLabel(paragraphs[0]);
-		panel.add(mainParagaph);
+		JLabel mainParagraph = new JLabel(descriptions[0]);
+		panel.add(mainParagraph);
 		airlines.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
-					mainParagaph.setText(paragraphs[airlines.getSelectedIndex()]);
+					mainParagraph.setText(descriptions[airlines.getSelectedIndex()]);
 				}
 			}
 		});
@@ -133,6 +131,8 @@ public class ReservationRequestHandler implements Runnable {
 		next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//TODO instantiate airlineChoice field here
+				airlineChoice = new Alaska(new ArrayList<Passenger>());
 				stage_3();
 			}
 		});
@@ -142,7 +142,31 @@ public class ReservationRequestHandler implements Runnable {
 	}
 
 	public void stage_3() {
+		JPanel panel = new JPanel();
+		JLabel title = new JLabel("Are you sure that you want to book a flight on " + );
+		panel.add(title);
+		JButton exit = new JButton("No");
+		panel.add(exit);
+		JButton next = new JButton("Choose this flight");
+		panel.add(next);
 
+		exit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stage_7();
+			}
+		});
+
+		next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//TODO instantiate airlineChoice field here
+				stage_3();
+			}
+		});
+
+		mainPanel.add(panel, "2");
+		layout.show(mainPanel, "2");
 	}
 
 	public void stage_4() {
