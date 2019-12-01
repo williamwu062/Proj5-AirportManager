@@ -11,35 +11,5 @@ public class Alaska implements Airline {
 					"WiFi.<br>We hope you choose Alaska Airlines for your next itinerary!</html>";
 	public static final String name = "Alaska";
 	public static int aSeats = 100;
-	private ArrayList<Passenger> passengers;
-
-	public Alaska(ArrayList<Passenger> passengers) throws NullPointerException {
-		this.passengers = passengers;
-
-		if (passengers == null) {
-			throw new NullPointerException();
-		}
-	}
-
-	public ArrayList<Passenger> getPassengers() {
-		return passengers;
-	}
-
-	public void addPassenger(Passenger passenger) {
-		passengers.add(passenger);
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Alaska alaska = (Alaska) o;
-		return Objects.equals(description, alaska.description) &&
-						passengers.equals(alaska.passengers) &&
-						Objects.equals(name, alaska.name);
-	}
-
-	public String toString() {
-		return "";
-	}
+	public static ArrayList<Passenger> passengers;
 }

@@ -7,22 +7,5 @@ public class Southwest implements Airline {
 					"predominately cheap flights.<br>We hope you choose Southwest for your next flight.</html>";
 	public static final String name = "Southwest";
 	public static int swSeats = 100;
-	private ArrayList<Passenger> passengers;
-
-	public Southwest(ArrayList<Passenger> passengers) throws NullPointerException {
-		if (passengers == null) {
-			throw new NullPointerException();
-		}
-		this.passengers = passengers;
-	}
-
-	@Override
-	public ArrayList<Passenger> getPassengers() {
-		return passengers;
-	}
-
-	@Override
-	public void addPassenger(Passenger passenger) {
-		passengers.add(passenger);
-	}
+	public static ArrayList<Passenger> passengers;
 }

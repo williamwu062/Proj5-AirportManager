@@ -8,23 +8,5 @@ public class Delta implements Airline {
 					"for passenger use.<br>We hope you choose to fly Delta at your next airline.</html>";
 	public static final String name = "Delta";
 	public static int dSeats = 100;
-	private ArrayList<Passenger> passengers;
-
-	public Delta(ArrayList<Passenger> passengers) throws NullPointerException {
-		this.passengers = passengers;
-
-		if (passengers == null) {
-			throw new NullPointerException();
-		}
-	}
-
-	@Override
-	public ArrayList<Passenger> getPassengers() {
-		return passengers;
-	}
-
-	@Override
-	public void addPassenger(Passenger passenger) {
-		passengers.add(passenger);
-	}
+	public static ArrayList<Passenger> passengers;
 }

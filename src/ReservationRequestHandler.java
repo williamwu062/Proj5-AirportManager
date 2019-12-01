@@ -23,7 +23,10 @@ public class ReservationRequestHandler implements Runnable {
 	private JFrame frame;
 	private JPanel mainPanel;
 	private CardLayout layout;
-	private Airline airlineChoice;
+	private String airlineChoice;
+	private Passenger passenger;
+
+	//TODO need prompt if flight is full? Maybe. Yea we need to remove the option from stage 2
 
 	/**
 	 * Initializes fields.
@@ -132,7 +135,7 @@ public class ReservationRequestHandler implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//TODO instantiate airlineChoice field here
-				airlineChoice = new Alaska(new ArrayList<Passenger>());
+				airlineChoice = airlines.getName();
 				stage_3();
 			}
 		});
@@ -143,8 +146,58 @@ public class ReservationRequestHandler implements Runnable {
 
 	public void stage_3() {
 		JPanel panel = new JPanel();
-		JLabel title = new JLabel("Are you sure that you want to book a flight on " + );
+		JLabel title = new JLabel("Are you sure that you want to book a flight on " + airlineChoice);
 		panel.add(title);
+		JButton exit = new JButton("No");
+		panel.add(exit);
+		JButton differentFlight = new JButton("Different flight");
+		panel.add(differentFlight);
+		JButton next = new JButton("Choose this flight");
+		panel.add(next);
+
+		exit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stage_7();
+			}
+		});
+
+		differentFlight.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stage_2();
+			}
+		});
+
+		next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stage_4();
+			}
+		});
+
+		mainPanel.add(panel, "3");
+		layout.show(mainPanel, "3");
+	}
+
+	public void stage_4() {
+		JPanel panel = new JPanel();
+		JLabel title = new JLabel("Input you information below");
+		panel.add(title);
+
+		JLabel name = new JLabel("What is your name");
+		panel.add(name);
+		JTextField nameField = new JTextField();
+		panel.add(nameField);
+		JLabel lname = new JLabel("What is your name");
+		panel.add(lname);
+		JTextField lnameField = new JTextField();
+		panel.add(lnameField);
+		JLabel age = new JLabel("What is your name");
+		panel.add(age);
+		JTextField ageField = new JTextField();
+		panel.add(ageField);
+
 		JButton exit = new JButton("No");
 		panel.add(exit);
 		JButton next = new JButton("Choose this flight");
@@ -160,17 +213,31 @@ public class ReservationRequestHandler implements Runnable {
 		next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO instantiate airlineChoice field here
-				stage_3();
+				try {
+					int convertedAge = Integer.parseInt(ageField.getText());
+
+					String passengerInfo = String.format("The passenger's name is %s %s and their age is %d.",
+									nameField.getText(),
+									lnameField.getText(), convertedAge);
+					int option = JOptionPane.showConfirmDialog(null,
+									"<html>Are all the details you entered correct?\n" + passengerInfo + "If all the " +
+													"information shown is correct select the Yes button below, " +
+													"otherwise, select the No button.<html>", "Confirm",
+									JOptionPane.YES_NO_OPTION);
+					if (option == JOptionPane.YES_OPTION) {
+						passenger = new Passenger(nameField.getText(), lnameField.getText(), convertedAge);
+
+						stage_5();
+					}
+				} catch(NumberFormatException a) {
+					JOptionPane.showMessageDialog(null, "Please enter an integer for your age", "Error", JOptionPane.ERROR_MESSAGE);
+					ageField.requestFocus();
+				}
 			}
 		});
 
-		mainPanel.add(panel, "2");
-		layout.show(mainPanel, "2");
-	}
-
-	public void stage_4() {
-
+		mainPanel.add(panel, "4");
+		layout.show(mainPanel, "4");
 	}
 
 	public void stage_5() {

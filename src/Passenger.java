@@ -13,7 +13,7 @@ public class Passenger {
 		this.age = age;
 	}
 
-	public void addBoardingPass() {
-		//TODO create a boarding pass
+	public void addBoardingPass(BoardingPass pass) {
+		this.pass = pass;
 	}
 }
