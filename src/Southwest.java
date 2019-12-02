@@ -18,10 +18,12 @@ public class Southwest implements Airline {
 	 * Name of the airline.
 	 */
 	public static final String name = "Southwest";
+	public static String numSeat;
 	/**
 	 * Number of seats on the airline.
 	 */
 	public static int swSeats = 100;
+	public static int seatCount = 0;
 	/**
 	 * ArrayList of the passengers on the airplane.
 	 */

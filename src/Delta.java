@@ -22,7 +22,9 @@ public class Delta implements Airline {
 	/**
 	 * Number of seats on the airline.
 	 */
+	public static String numSeat;
 	public static int dSeats = 100;
+	public static int seatCount = 0;
 	/**
 	 * ArrayList of the passengers on the airplane.
 	 */

@@ -162,6 +162,7 @@ public class ReservationServer {
 			if(Alaska.alaskaInfo.get(i).contains(".")) {
 				Alaska.passenger.add(Alaska.alaskaInfo.get(i));
 				Alaska.aSeats--;
+				Alaska.seatCount++;
 			}
 		}
 		return Alaska.passenger;
@@ -172,6 +173,7 @@ public class ReservationServer {
 			if(Delta.deltaInfo.get(i).contains(".")) {
 				Delta.passenger.add(Delta.deltaInfo.get(i));
 				Delta.dSeats--;
+				Delta.seatCount++;
 			}
 		}
 		return Delta.passenger;
@@ -182,9 +184,64 @@ public class ReservationServer {
 			if(Southwest.southwestInfo.get(i).contains(".")) {
 				Southwest.passenger.add(Southwest.southwestInfo.get(i));
 				Southwest.swSeats--;
+				Southwest.seatCount++;
 			}
 		}
 		return Southwest.passenger;
+	}
+
+	public static void setAlaskaInfo() {
+		ArrayList<String> temp = new ArrayList<>();
+		String tempString = "";
+		temp.add(Alaska.passenger.get(Alaska.passenger.size()-1));
+		temp.add("---------------------ALASKA");
+		for (int i = 0; i < temp.size(); i++) {
+			Alaska.alaskaInfo.add(temp.get(i));
+		}
+
+		for (int j = 0; j < Alaska.alaskaInfo.size(); j++) {
+			if(Alaska.alaskaInfo.get(j).contains("/")) {
+				tempString = Alaska.seatCount + Alaska.alaskaInfo.get(j).substring(Alaska.alaskaInfo.get(j).indexOf('/'));
+				Alaska.numSeat = tempString;
+				Alaska.alaskaInfo.set(j, tempString);
+			}
+		}
+	}
+
+	public static void setDeltaInfo() {
+		ArrayList<String> temp = new ArrayList<>();
+		String tempString = "";
+		temp.add(Delta.passenger.get(Delta.passenger.size()-1));
+		temp.add("---------------------ALASKA");
+		for (int i = 0; i < temp.size(); i++) {
+			Delta.deltaInfo.add(temp.get(i));
+		}
+
+		for (int j = 0; j < Delta.deltaInfo.size(); j++) {
+			if(Delta.deltaInfo.get(j).contains("/")) {
+				tempString = Delta.seatCount + Delta.deltaInfo.get(j).substring(Delta.deltaInfo.get(j).indexOf('/'));
+				Delta.numSeat = tempString;
+				Delta.deltaInfo.set(j, tempString);
+			}
+		}
+	}
+
+	public static void setSouthwestInfo() {
+		ArrayList<String> temp = new ArrayList<>();
+		String tempString = "";
+		temp.add(Southwest.passenger.get(Southwest.passenger.size()-1));
+		temp.add("---------------------ALASKA");
+		for (int i = 0; i < temp.size(); i++) {
+			Southwest.southwestInfo.add(temp.get(i));
+		}
+
+		for (int j = 0; j < Southwest.southwestInfo.size(); j++) {
+			if(Southwest.southwestInfo.get(j).contains("/")) {
+				tempString = Southwest.seatCount + Southwest.southwestInfo.get(j).substring(Southwest.southwestInfo.get(j).indexOf('/'));
+				Southwest.numSeat = tempString;
+				Southwest.southwestInfo.set(j, tempString);
+			}
+		}
 	}
 
 	public static void main(String[] args) {
