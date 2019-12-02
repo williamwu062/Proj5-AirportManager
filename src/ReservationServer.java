@@ -21,6 +21,13 @@ public class ReservationServer {
 			Delta.gate = new Gate();
 			Southwest.gate = new Gate();
 		}
+
+		getAlaskaInfo();
+		getDeltaInfo();
+		getSouthwestInfo();
+		getAlaskaPassenger();
+		getDeltaPassenger();
+		getSouthwestPassenger();
 	}
 	public static ArrayList<String> getAlaskaInfo() {
 		File file = new File("reservations.txt");
@@ -155,6 +162,36 @@ public class ReservationServer {
 		} catch (IOException e) {
 
 		}
+	}
+
+	public static ArrayList<String> getAlaskaPassenger() {
+		for (int i = 0; i < Alaska.alaskaInfo.size(); i++) {
+			if(Alaska.alaskaInfo.get(i).contains(".")) {
+				Alaska.passenger.add(Alaska.alaskaInfo.get(i));
+				Alaska.aSeats--;
+			}
+		}
+		return Alaska.passenger;
+	}
+
+	public static ArrayList<String> getDeltaPassenger() {
+		for (int i = 0; i < Delta.deltaInfo.size(); i++) {
+			if(Delta.deltaInfo.get(i).contains(".")) {
+				Delta.passenger.add(Delta.deltaInfo.get(i));
+				Delta.dSeats--;
+			}
+		}
+		return Delta.passenger;
+	}
+
+	public static ArrayList<String> getSouthwestPassenger() {
+		for (int i = 0; i < Southwest.southwestInfo.size(); i++) {
+			if(Southwest.southwestInfo.get(i).contains(".")) {
+				Southwest.passenger.add(Southwest.southwestInfo.get(i));
+				Southwest.swSeats--;
+			}
+		}
+		return Southwest.passenger;
 	}
 
 	public static void main(String[] args) {
