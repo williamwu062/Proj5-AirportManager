@@ -23,9 +23,6 @@ public class ReservationRequestHandler implements Runnable {
 	private JFrame frame;
 	private JPanel mainPanel;
 	private CardLayout layout;
-	private ArrayList<String> alaskaInfo;
-	private ArrayList<String> southwestInfo;
-	private ArrayList<String> deltaInfo;
 	private String airlineChoice;
 	private Passenger passenger;
 
@@ -342,7 +339,11 @@ public class ReservationRequestHandler implements Runnable {
 
 	public void stage_7() {
 		JOptionPane.showMessageDialog(null, "Thank you for using Purdue University Airline Management System!",
-				"THank you", JOptionPane.INFORMATION_MESSAGE);
+				"Thank you", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public synchronized void airlinePassengers() {
+
 	}
 
 	@Override
