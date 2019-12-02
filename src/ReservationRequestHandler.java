@@ -23,9 +23,7 @@ public class ReservationRequestHandler implements Runnable {
 	private JFrame frame;
 	private JPanel mainPanel;
 	private CardLayout layout;
-	private ArrayList<String> alaskaInfo;
-	private ArrayList<String> southwestInfo;
-	private ArrayList<String> deltaInfo;
+	private String whichAirline;
 	private String airlineChoice;
 	private Passenger passenger;
 
