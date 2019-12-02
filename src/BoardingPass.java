@@ -1,5 +1,7 @@
 /**
  * BoardingPass class that contains information on the passenger and flight.
+ * @author williamwu
+ * @version 1.0
  */
 public class BoardingPass {
 	private String firstName;
@@ -15,7 +17,7 @@ public class BoardingPass {
 	 * @param lastName  the lastName of the passenger
 	 * @param age       the age of the passenger
 	 */
-	public BoardingPass(String firstName, String lastName, int age, String airlineName) {
+	public BoardingPass(String firstName, String lastName, int age, String airlineName, Gate gate) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -49,5 +51,23 @@ public class BoardingPass {
 		return age;
 	}
 
-	//TODO need to add flight and flight number
+	/**
+	 * Gets airline name.
+	 * @return airline name
+	 */
+	public String getAirlineName() {
+		return airlineName;
+	}
+
+	/**
+	 * Gets gate.
+	 * @return gate
+	 */
+	public Gate getGate() {
+		return gate;
+	}
+
+	public String toString() {
+		return String.format("");
+	}
 }

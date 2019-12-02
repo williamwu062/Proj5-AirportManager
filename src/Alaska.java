@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * @author williamwu
+ * @version 1.0
+ */
 public class Alaska implements Airline {
 	public static final String description = "<html>Alaska Airlines is proud to serve the strong and knowledgeable " +
 					"Boilermakers from Purdue University.<br>We primarily fly westward and often have stops in " +
@@ -12,4 +16,5 @@ public class Alaska implements Airline {
 	public static final String name = "Alaska";
 	public static int aSeats = 100;
 	public static ArrayList<Passenger> passengers;
+	public static Gate gate;
 }

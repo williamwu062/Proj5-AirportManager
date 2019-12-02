@@ -5,6 +5,8 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Client class where the user can buy a ticket if one is still available.
+ * @author williamwu
+ * @version 1.0
  */
 public final class ReservationClient {
 

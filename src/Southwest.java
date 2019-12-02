@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * @author williamwu
+ * @version 1.0
+ */
 public class Southwest implements Airline {
 	public static final String description = "<html>Southwest Airlines is proud to offer flights to Purdue " +
 					"University.<br>We are happy to offer free in flight WiFi, along with a wide assortment of " +
@@ -8,4 +12,5 @@ public class Southwest implements Airline {
 	public static final String name = "Southwest";
 	public static int swSeats = 100;
 	public static ArrayList<Passenger> passengers;
+	public static Gate gate;
 }

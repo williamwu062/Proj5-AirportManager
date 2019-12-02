@@ -15,6 +15,10 @@ import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.IOException;
 
+/**
+ * @author williamwu
+ * @version 1.0
+ */
 public class ReservationRequestHandler implements Runnable {
 	/**
 	 * The client socket of this request handler.
@@ -135,7 +139,7 @@ public class ReservationRequestHandler implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//TODO instantiate airlineChoice field here
-				airlineChoice = airlines.getName();
+				airlineChoice = (String) airlines.getSelectedItem();
 				stage_3();
 			}
 		});
@@ -220,17 +224,24 @@ public class ReservationRequestHandler implements Runnable {
 									nameField.getText(),
 									lnameField.getText(), convertedAge);
 					int option = JOptionPane.showConfirmDialog(null,
-									"<html>Are all the details you entered correct?\n" + passengerInfo + "If all the " +
+									"<html>Are all the details you entered correct?\n" + passengerInfo + "If all the" +
+													" " +
 													"information shown is correct select the Yes button below, " +
 													"otherwise, select the No button.<html>", "Confirm",
 									JOptionPane.YES_NO_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
+						Gate gate = null;
+
+						BoardingPass pass = new BoardingPass(nameField.getText(), lnameField.getText(), convertedAge,
+										airlineChoice, gate);
 						passenger = new Passenger(nameField.getText(), lnameField.getText(), convertedAge);
+						passenger.addBoardingPass(pass);
 
 						stage_5();
 					}
-				} catch(NumberFormatException a) {
-					JOptionPane.showMessageDialog(null, "Please enter an integer for your age", "Error", JOptionPane.ERROR_MESSAGE);
+				} catch (NumberFormatException a) {
+					JOptionPane.showMessageDialog(null, "Please enter an integer for your age", "Error",
+									JOptionPane.ERROR_MESSAGE);
 					ageField.requestFocus();
 				}
 			}
@@ -241,7 +252,13 @@ public class ReservationRequestHandler implements Runnable {
 	}
 
 	public void stage_5() {
+		JPanel panel = new JPanel();
+		JLabel title = new JLabel("<html>Flight data displaying for " + airlineChoice + " Airlines<br>Enjoy " +
+						"your flight!<br>Flight is now boarding at Gate<html>" + passenger.getPass().getGate().getGate());
+		panel.add(title);
 
+		mainPanel.add(panel, "5");
+		layout.show(mainPanel, "5");
 	}
 
 	public void stage_6() {
