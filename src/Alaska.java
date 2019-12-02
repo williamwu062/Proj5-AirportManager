@@ -23,10 +23,12 @@ public class Alaska implements Airline {
 	 * Name of the airline.
 	 */
 	public static final String name = "Alaska";
+	public static String numSeat;
 	/**
 	 * Number of seats on the airline.
 	 */
 	public static int aSeats = 100;
+	public static int seatCount = 0;
 	/**
 	 * ArrayList of the passengers on the airplane.
 	 */
