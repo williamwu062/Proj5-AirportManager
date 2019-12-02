@@ -46,17 +46,11 @@ public class Passenger {
 			while(true) {
 				if(!string.equals("")) {
 					s = bfr.readLine();
-					if(s == null || s.equals("EOF")) {
+					if(s == null) {
 						break;
 					}
 					if(s.equals(string)) {
-						if(!s.contains(".") || s.contains("/") || s.equals("")) {
-							bfr.readLine();
-						}
-						else {
 							this.names.add(s);
-						}
-
 						if(s.equals(exception1) || s.equals(exception2)) {
 							break;
 						}

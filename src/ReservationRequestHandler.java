@@ -20,6 +20,9 @@ public class ReservationRequestHandler implements Runnable {
 	private JPanel mainPanel;
 	private CardLayout layout;
 	private String whichAirline;
+	private ArrayList<String> alaskaInfo;
+	private ArrayList<String> southwestInfo;
+	private ArrayList<String> deltaInfo;
 
 	/**
 	 * Initializes fields.
@@ -35,6 +38,118 @@ public class ReservationRequestHandler implements Runnable {
 	/**
 	 * Handles the requests of the client connected to this request handler's client socket.
 	 */
+	public ArrayList<String> getAlaskaInfo() {
+		File file = new File("reservations.txt");
+		String exception1 = "";
+		String exception2 = "";
+
+		try {
+			FileReader fr = new FileReader(file);
+			BufferedReader bfr = new BufferedReader(fr);
+			String s = "";
+			String t = "";
+				while (true) {
+					s = bfr.readLine();
+					if (s == null) {
+						break;
+					}
+					if (s.equals("ALASKA")) {
+						this.alaskaInfo.add(s);
+						while (true) {
+							t = bfr.readLine();
+							if (t == null) {
+								break;
+							}
+							if (!t.equals("DELTA") || !t.equals("SOUTHWEST") || !t.equals("EOF")) {
+								this.alaskaInfo.add(t);
+							}
+							else {
+								break;
+							}
+						}
+					}
+				}
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, "The file does not exist!", "File not found", JOptionPane.ERROR_MESSAGE);
+			}
+			return this.alaskaInfo;
+		}
+
+	public ArrayList<String> getSouthwestInfo() {
+		File file = new File("reservations.txt");
+		String exception1 = "";
+		String exception2 = "";
+
+		try {
+			FileReader fr = new FileReader(file);
+			BufferedReader bfr = new BufferedReader(fr);
+			String s = "";
+			String t = "";
+			while (true) {
+				s = bfr.readLine();
+				if (s == null) {
+					break;
+				}
+				if (s.equals("SOUTHWEST")) {
+					this.alaskaInfo.add(s);
+					while (true) {
+						t = bfr.readLine();
+						if(t == null)
+						{
+							break;
+						}
+						if (!t.equals("DELTA") || !t.equals("ALASKA") || !t.equals("EOF")) {
+							this.alaskaInfo.add(t);
+						}
+						else {
+							break;
+						}
+					}
+				}
+			}
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "The file does not exist!", "File not found", JOptionPane.ERROR_MESSAGE);
+		}
+		return this.alaskaInfo;
+	}
+
+	public ArrayList<String> getDeltaInfo() {
+		File file = new File("reservations.txt");
+		String exception1 = "";
+		String exception2 = "";
+
+		try {
+			FileReader fr = new FileReader(file);
+			BufferedReader bfr = new BufferedReader(fr);
+			String s = "";
+			String t = "";
+			while (true) {
+				s = bfr.readLine();
+				if (s == null) {
+					break;
+				}
+				if (s.equals("DELTA")) {
+					this.alaskaInfo.add(s);
+					while (true) {
+						t = bfr.readLine();
+						if (t == null) {
+							break;
+						}
+						if (!t.equals("ALASKA") || !t.equals("SOUTHWEST") || !t.equals("EOF")) {
+							this.alaskaInfo.add(t);
+						}
+						else {
+							break;
+						}
+					}
+				}
+			}
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "The file does not exist!", "File not found", JOptionPane.ERROR_MESSAGE);
+		}
+		return this.alaskaInfo;
+	}
+
 	public void stage_0() {
 		JPanel panel = new JPanel();
 		panel.setSize(500, 500);
@@ -130,7 +245,7 @@ public class ReservationRequestHandler implements Runnable {
 				stage_2();
 			}
 		});
-
+		frame.setResizable(false);
 		mainPanel.add(panel, "1");
 		layout.show(mainPanel, "1");
 	}
@@ -177,13 +292,37 @@ public class ReservationRequestHandler implements Runnable {
 				stage_3();
 			}
 		});
-
+		frame.setResizable(false);
 		mainPanel.add(panel, "2");
 		layout.show(mainPanel, "2");
 	}
 
 	public void stage_3() {
+		JPanel panel = new JPanel();
+		JLabel title = new JLabel("Are you sure that you want to book a flight on ");
+		panel.add(title);
+		JButton exit = new JButton("No");
+		panel.add(exit);
+		JButton next = new JButton("Choose this flight");
+		panel.add(next);
 
+		exit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stage_7();
+			}
+		});
+
+		next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//TODO instantiate airlineChoice field here
+				stage_3();
+			}
+		});
+
+		mainPanel.add(panel, "2");
+		layout.show(mainPanel, "2");
 	}
 
 	public void stage_4() {
@@ -199,7 +338,8 @@ public class ReservationRequestHandler implements Runnable {
 	}
 
 	public void stage_7() {
-
+		JOptionPane.showMessageDialog(null, "Thank you for using Purdue University Airline Management System!",
+				"THank you", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	@Override
@@ -213,6 +353,7 @@ public class ReservationRequestHandler implements Runnable {
 		frame.add(mainPanel);
 		frame.setSize(500, 500);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		frame.setResizable(false);
 		frame.setVisible(true);
 	} //run
 
