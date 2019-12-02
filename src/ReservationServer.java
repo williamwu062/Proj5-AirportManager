@@ -21,6 +21,13 @@ public class ReservationServer {
 			Delta.gate = new Gate();
 			Southwest.gate = new Gate();
 		}
+
+		getAlaskaInfo();
+		getDeltaInfo();
+		getSouthwestInfo();
+		getAlaskaPassenger();
+		getDeltaPassenger();
+		getSouthwestPassenger();
 	}
 	public static ArrayList<String> getAlaskaInfo() {
 		File file = new File("reservations.txt");

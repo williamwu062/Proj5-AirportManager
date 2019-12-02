@@ -1,10 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.lang.reflect.Array;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -23,9 +20,6 @@ public class ReservationRequestHandler implements Runnable {
 	private JFrame frame;
 	private JPanel mainPanel;
 	private CardLayout layout;
-	private ArrayList<String> alaskaInfo;
-	private ArrayList<String> southwestInfo;
-	private ArrayList<String> deltaInfo;
 	private String airlineChoice;
 	private Passenger passenger;
 
@@ -155,6 +149,7 @@ public class ReservationRequestHandler implements Runnable {
 
 		JPanel panel_0 = new JPanel();
 		panel_0.setLayout(new BoxLayout(panel_0, BoxLayout.Y_AXIS));
+		panel_0.setFocusable(true);
 
 		JPanel helpPanel_0 = new JPanel();
 		JLabel title = new JLabel("<html><b>Choose a Flight</b></html>");
@@ -197,6 +192,15 @@ public class ReservationRequestHandler implements Runnable {
 			}
 		});
 
+		panel_0.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_BACK_SLASH) {
+					JOptionPane.showMessageDialog(null, "Hi", "title", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+
 		next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -205,6 +209,7 @@ public class ReservationRequestHandler implements Runnable {
 				stage_3();
 			}
 		});
+
 
 		panel_0.add(helpPanel_1);
 		mainPanel.add(panel_0, "2");
@@ -342,10 +347,10 @@ public class ReservationRequestHandler implements Runnable {
 
 	public void stage_7() {
 		JOptionPane.showMessageDialog(null, "Thank you for using Purdue University Airline Management System!",
-				"Thank you", JOptionPane.INFORMATION_MESSAGE);
+						"Thank you", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	public synchronized void airlinePassengers() {
+	public synchronized void swAirlinePassengers() {
 
 	}
 
