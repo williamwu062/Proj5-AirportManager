@@ -99,7 +99,7 @@ public class ReservationRequestHandler implements Runnable {
 					break;
 				}
 				if (s.equals("SOUTHWEST")) {
-					this.alaskaInfo.add(s);
+					this.southwestInfo.add(s);
 					while (true) {
 						t = bfr.readLine();
 						if(t == null)
@@ -107,7 +107,7 @@ public class ReservationRequestHandler implements Runnable {
 							break;
 						}
 						if (!t.equals("DELTA") || !t.equals("ALASKA") || !t.equals("EOF")) {
-							this.alaskaInfo.add(t);
+							this.southwestInfo.add(t);
 						}
 						else {
 							break;
@@ -118,7 +118,7 @@ public class ReservationRequestHandler implements Runnable {
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "The file does not exist!", "File not found", JOptionPane.ERROR_MESSAGE);
 		}
-		return this.alaskaInfo;
+		return this.southwestInfo;
 	}
 
 	public ArrayList<String> getDeltaInfo() {
@@ -137,14 +137,14 @@ public class ReservationRequestHandler implements Runnable {
 					break;
 				}
 				if (s.equals("DELTA")) {
-					this.alaskaInfo.add(s);
+					this.deltaInfo.add(s);
 					while (true) {
 						t = bfr.readLine();
 						if (t == null) {
 							break;
 						}
 						if (!t.equals("ALASKA") || !t.equals("SOUTHWEST") || !t.equals("EOF")) {
-							this.alaskaInfo.add(t);
+							this.deltaInfo.add(t);
 						}
 						else {
 							break;
@@ -155,7 +155,7 @@ public class ReservationRequestHandler implements Runnable {
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "The file does not exist!", "File not found", JOptionPane.ERROR_MESSAGE);
 		}
-		return this.alaskaInfo;
+		return this.deltaInfo;
 	}
 
 	public void stage_0() {
