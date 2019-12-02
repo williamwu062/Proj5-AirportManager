@@ -453,7 +453,11 @@ public class ReservationRequestHandler implements Runnable {
 
 	public void stage_7() {
 		JOptionPane.showMessageDialog(null, "Thank you for using Purdue University Airline Management System!",
-				"THank you", JOptionPane.INFORMATION_MESSAGE);
+				"Thank you", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public synchronized void airlinePassengers() {
+
 	}
 
 	@Override
