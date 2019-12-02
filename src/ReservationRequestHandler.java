@@ -31,6 +31,7 @@ public class ReservationRequestHandler implements Runnable {
 	private Passenger passenger;
 
 	//TODO need prompt if flight is full? Maybe. Yea we need to remove the option from stage 2
+	//TODO check if the textfields are empty in stage 6 I think
 
 	/**
 	 * Initializes fields.
@@ -47,13 +48,21 @@ public class ReservationRequestHandler implements Runnable {
 	 * Handles the requests of the client connected to this request handler's client socket.
 	 */
 	public void stage_0() {
-		JPanel panel = new JPanel();
-		JLabel welcome = new JLabel("Welcome to Purdue University Airline Reservation Management System!");
-		panel.add(welcome);
+		JPanel panel_0 = new JPanel();
+		panel_0.setLayout(new BoxLayout(panel_0, BoxLayout.Y_AXIS));
+
+		JPanel helpPanel_0 = new JPanel();
+		JLabel welcome = new JLabel("<html><b>Welcome to Purdue University Airline Reservation Management " +
+						"System!</b></html>");
+		helpPanel_0.add(welcome);
+		panel_0.add(helpPanel_0);
+
+		JPanel helpPanel_1 = new JPanel();
+		helpPanel_1.setLayout(new BoxLayout(helpPanel_1, BoxLayout.X_AXIS));
 		JButton exit = new JButton("Exit");
-		panel.add(exit);
+		helpPanel_1.add(exit);
 		JButton next = new JButton("Book a Flight");
-		panel.add(next);
+		helpPanel_1.add(next);
 
 		exit.addActionListener(new ActionListener() {
 			@Override
@@ -69,7 +78,8 @@ public class ReservationRequestHandler implements Runnable {
 			}
 		});
 
-		mainPanel.add(panel, "0");
+		panel_0.add(helpPanel_1);
+		mainPanel.add(panel_0, "0");
 		layout.show(mainPanel, "0");
 
 		//JLabel imageWelcome = new JLabel(new ImageIcon("Images/Purdue_Boilermakers_logo.svg.png"));
@@ -77,13 +87,20 @@ public class ReservationRequestHandler implements Runnable {
 	}
 
 	public void stage_1() {
-		JPanel panel = new JPanel();
-		JLabel welcome = new JLabel("Are You Sure You Want to Book a Flight?");
-		panel.add(welcome);
+		JPanel panel_0 = new JPanel();
+		panel_0.setLayout(new BoxLayout(panel_0, BoxLayout.Y_AXIS));
+
+		JPanel helpPanel_0 = new JPanel();
+		JLabel welcome = new JLabel("<html><b>Are You Sure You Want to Book a Flight?</b></html>");
+		helpPanel_0.add(welcome);
+		panel_0.add(helpPanel_0);
+
+		JPanel helpPanel_1 = new JPanel();
+		helpPanel_1.setLayout(new BoxLayout(helpPanel_1, BoxLayout.X_AXIS));
 		JButton exit = new JButton("No");
-		panel.add(exit);
+		helpPanel_1.add(exit);
 		JButton next = new JButton("Yes");
-		panel.add(next);
+		helpPanel_1.add(next);
 
 		exit.addActionListener(new ActionListener() {
 			@Override
@@ -99,26 +116,40 @@ public class ReservationRequestHandler implements Runnable {
 			}
 		});
 
-		mainPanel.add(panel, "1");
+		panel_0.add(helpPanel_1);
+		mainPanel.add(panel_0, "1");
 		layout.show(mainPanel, "1");
 	}
 
 	public void stage_2() {
-		JPanel panel = new JPanel();
-		JLabel title = new JLabel("Choose a Flight");
-		panel.add(title);
+
+		JPanel panel_0 = new JPanel();
+		panel_0.setLayout(new BoxLayout(panel_0, BoxLayout.Y_AXIS));
+
+		JPanel helpPanel_0 = new JPanel();
+		JLabel title = new JLabel("<html><b>Choose a Flight</b></html>");
+		helpPanel_0.add(title);
+		panel_0.add(helpPanel_0);
+		//TODO create a hashmap before creating an array of airline names. This so that we can find which planes are
+		// full
+
+		JPanel helpPanel_1 = new JPanel();
+		helpPanel_1.setLayout(new BoxLayout(helpPanel_1, BoxLayout.X_AXIS));
+		JButton exit = new JButton("No");
+		helpPanel_1.add(exit);
+		JButton next = new JButton("Choose this flight");
+		helpPanel_1.add(next);
+
 		String[] airlineNames = {Alaska.name, Delta.name, Southwest.name}; //TODO maybe change to getName from Airline
 		JComboBox airlines = new JComboBox(airlineNames);
-		panel.add(airlines);
-		JButton exit = new JButton("No");
-		panel.add(exit);
-		JButton next = new JButton("Choose this flight");
-		panel.add(next);
+		panel_0.add(airlines);
 
+		JPanel helpPanel_2 = new JPanel();
 		String[] descriptions = {Alaska.description, Delta.description, Southwest.description};
 		//JPanel wordPanel = new JPanel(); TODO shall i do this doe. IF needed when formatting the GUI
 		JLabel mainParagraph = new JLabel(descriptions[0]);
-		panel.add(mainParagraph);
+		helpPanel_2.add(mainParagraph);
+		panel_0.add(helpPanel_2);
 		airlines.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -144,20 +175,29 @@ public class ReservationRequestHandler implements Runnable {
 			}
 		});
 
-		mainPanel.add(panel, "2");
+		panel_0.add(helpPanel_1);
+		mainPanel.add(panel_0, "2");
 		layout.show(mainPanel, "2");
 	}
 
 	public void stage_3() {
-		JPanel panel = new JPanel();
-		JLabel title = new JLabel("Are you sure that you want to book a flight on " + airlineChoice);
-		panel.add(title);
+		JPanel panel_0 = new JPanel();
+		panel_0.setLayout(new BoxLayout(panel_0, BoxLayout.Y_AXIS));
+
+		JPanel helpPanel_0 = new JPanel();
+		JLabel title = new JLabel("<html><b>Are you sure that you want to book a flight on " + airlineChoice +
+						" Airlines?</b></html>");
+		helpPanel_0.add(title);
+		panel_0.add(helpPanel_0);
+
+		JPanel helpPanel_1 = new JPanel();
+		helpPanel_1.setLayout(new BoxLayout(helpPanel_1, BoxLayout.X_AXIS));
 		JButton exit = new JButton("No");
-		panel.add(exit);
+		helpPanel_1.add(exit);
 		JButton differentFlight = new JButton("Different flight");
-		panel.add(differentFlight);
+		helpPanel_1.add(differentFlight);
 		JButton next = new JButton("Choose this flight");
-		panel.add(next);
+		helpPanel_1.add(next);
 
 		exit.addActionListener(new ActionListener() {
 			@Override
@@ -180,7 +220,8 @@ public class ReservationRequestHandler implements Runnable {
 			}
 		});
 
-		mainPanel.add(panel, "3");
+		panel_0.add(helpPanel_1);
+		mainPanel.add(panel_0, "3");
 		layout.show(mainPanel, "3");
 	}
 
@@ -253,8 +294,10 @@ public class ReservationRequestHandler implements Runnable {
 
 	public void stage_5() {
 		JPanel panel = new JPanel();
-		JLabel title = new JLabel("<html>Flight data displaying for " + airlineChoice + " Airlines<br>Enjoy " +
-						"your flight!<br>Flight is now boarding at Gate<html>" + passenger.getPass().getGate().getGate());
+		JLabel title = new JLabel("<html>Flight data displaying for " + airlineChoice + "Airlines<br>" +
+						"Enjoy " +
+						"your flight!<br>Flight is now boarding at Gate" + passenger.getPass().getGate().getGate() +
+						"</html>");
 		panel.add(title);
 
 		mainPanel.add(panel, "5");
@@ -279,6 +322,7 @@ public class ReservationRequestHandler implements Runnable {
 
 		frame.add(mainPanel);
 		frame.setSize(900, 600);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setVisible(true);
 	} //run

@@ -1,5 +1,6 @@
 /**
  * BoardingPass class that contains information on the passenger and flight.
+ *
  * @author williamwu
  * @version 1.0
  */
@@ -53,6 +54,7 @@ public class BoardingPass {
 
 	/**
 	 * Gets airline name.
+	 *
 	 * @return airline name
 	 */
 	public String getAirlineName() {
@@ -61,6 +63,7 @@ public class BoardingPass {
 
 	/**
 	 * Gets gate.
+	 *
 	 * @return gate
 	 */
 	public Gate getGate() {
