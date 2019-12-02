@@ -66,6 +66,7 @@ public class ReservationRequestHandler implements Runnable{
         stage2.add(panelStage2Image);
         stage2.add(panelStage2Buttons);
         stage2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        stage2.setResizable(false);
         stage2.setVisible(true);
     }
 
