@@ -2,17 +2,27 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * @author williamwu
+ * @version 1.0
+ */
 public class ReservationServer {
 
-	public static int swSeats = 100;
-	public static int dSeats = 100;
-	public static int aSeats = 100;
+	public ReservationServer() {
+		Alaska.gate = new Gate();
+		Delta.gate = new Gate();
+		Southwest.gate = new Gate();
 
-	public static Passenger[] swPassengers = new Passenger[swSeats];
-	public static Passenger[] dPassengers = new Passenger[dSeats];
-	public static Passenger[] aPassengers = new Passenger[aSeats];
+		while (Alaska.gate.getGate().equals(Delta.gate.getGate()) || Alaska.gate.getGate()
+						.equals(Southwest.gate.getGate()) || Delta.gate.getGate().equals(Southwest.gate.getGate())) {
+			Alaska.gate = new Gate();
+			Delta.gate = new Gate();
+			Southwest.gate = new Gate();
+		}
+	}
 
 	public static void main(String[] args) {
+
 		try {
 			ServerSocket socket = new ServerSocket(6679);
 
