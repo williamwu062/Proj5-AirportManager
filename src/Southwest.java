@@ -22,6 +22,7 @@ public class Southwest implements Airline {
 	/**
 	 * Number of seats on the airline.
 	 */
+	public static int maxSeats = 0;
 	public static int swSeats = 100;
 	public static int seatCount = 0;
 	/**
