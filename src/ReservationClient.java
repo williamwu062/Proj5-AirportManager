@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.Socket;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -13,7 +12,6 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public final class ReservationClient {
-	private String fake;
 	private static BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
 	private static String hostname;
 	private static String portString;
@@ -37,7 +35,6 @@ public final class ReservationClient {
 						.orElse(Boolean.FALSE);
 	}
 
-
 	/**
 	 * Handles the requests of the client connected to this request handler's client socket.
 	 */
@@ -50,6 +47,12 @@ public final class ReservationClient {
 						"System!</b></html>");
 		helpPanel_0.add(welcome);
 		panel_0.add(helpPanel_0);
+
+		JPanel helpPanel_image = new JPanel();
+		JLabel imageWelcome = new JLabel(new ImageIcon((new ImageIcon("Images/Purdue_Boilermakers_logo.svg.png"))
+						.getImage().getScaledInstance(400, 300, 4)));
+		helpPanel_image.add(imageWelcome);
+		panel_0.add(helpPanel_image);
 
 		JPanel helpPanel_1 = new JPanel();
 		helpPanel_1.setLayout(new BoxLayout(helpPanel_1, BoxLayout.X_AXIS));
@@ -149,7 +152,7 @@ public final class ReservationClient {
 
 		JPanel panel_0 = new JPanel();
 		panel_0.setLayout(new BoxLayout(panel_0, BoxLayout.Y_AXIS));
-		panel_0.setFocusable(true);
+		mainPanel.setFocusable(true);
 		mainPanel.requestFocus();
 
 		JPanel helpPanel_0 = new JPanel();
@@ -166,7 +169,22 @@ public final class ReservationClient {
 		JButton next = new JButton("Choose this flight");
 		helpPanel_1.add(next);
 
-		String[] airlineNames = {Alaska.name, Delta.name, Southwest.name}; //TODO maybe change to getName from Airline
+		ArrayList<String> tempNames = new ArrayList<>();
+
+		if (getaNumSeat()) {
+			tempNames.add(Alaska.name);
+		}
+		if (getdNumSeat()) {
+			tempNames.add(Delta.name);
+		}
+		if (getswNumSeat()) {
+			tempNames.add(Southwest.name);
+		}
+
+		String[] airlineNames = new String[tempNames.size()]; //TODO maybe change to getName from Airline
+		for (int i = 0; i < airlineNames.length; i++) {
+			airlineNames[i] = tempNames.get(i);
+		}
 		JComboBox airlines = new JComboBox(airlineNames);
 		panel_0.add(airlines);
 
@@ -198,7 +216,8 @@ public final class ReservationClient {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_BACK_SLASH) {
-					airlinePassengers("Alaska");
+					String tempAirlineChoice = (String) airlines.getSelectedItem();
+					airlinePassengers(tempAirlineChoice);
 				}
 			}
 		});
@@ -221,6 +240,8 @@ public final class ReservationClient {
 	public void stage_3() {
 		JPanel panel_0 = new JPanel();
 		panel_0.setLayout(new BoxLayout(panel_0, BoxLayout.Y_AXIS));
+		mainPanel.setFocusable(true);
+		mainPanel.requestFocus();
 
 		JPanel helpPanel_0 = new JPanel();
 		JLabel title = new JLabel("<html><b>Are you sure that you want to book a flight on " + airlineChoice +
@@ -230,13 +251,21 @@ public final class ReservationClient {
 
 		JPanel helpPanel_1 = new JPanel();
 		helpPanel_1.setLayout(new BoxLayout(helpPanel_1, BoxLayout.X_AXIS));
-
 		JButton exit = new JButton("No");
 		helpPanel_1.add(exit);
 		JButton differentFlight = new JButton("Different flight");
 		helpPanel_1.add(differentFlight);
 		JButton next = new JButton("Choose this flight");
 		helpPanel_1.add(next);
+
+		mainPanel.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_BACK_SLASH) {
+					airlinePassengers(airlineChoice);
+				}
+			}
+		});
 
 		exit.addActionListener(new ActionListener() {
 			@Override
@@ -265,32 +294,53 @@ public final class ReservationClient {
 	}
 
 	public void stage_4() {
-		JPanel panel = new JPanel();
-		JLabel title = new JLabel("Input you information below");
-		panel.add(title);
+		JPanel panel_0 = new JPanel();
+		panel_0.setLayout(new BoxLayout(panel_0, BoxLayout.Y_AXIS));
+		mainPanel.setFocusable(true);
+		mainPanel.requestFocus();
 
+		JPanel helpPanel_0 = new JPanel();
+		JLabel title = new JLabel("<html><b>Input you information below</b></html>");
+		helpPanel_0.add(title);
+		panel_0.add(helpPanel_0);
+
+		JPanel helpPanel_2 = new JPanel();
+		helpPanel_2.setLayout(new BoxLayout(helpPanel_2, BoxLayout.Y_AXIS));
 		JLabel name = new JLabel("What is your name");
-		panel.add(name);
+		helpPanel_2.add(name);
 		JTextField nameField = new JTextField();
-		panel.add(nameField);
-		JLabel lname = new JLabel("What is your name");
-		panel.add(lname);
+		helpPanel_2.add(nameField);
+		JLabel lname = new JLabel("What is your last name");
+		helpPanel_2.add(lname);
 		JTextField lnameField = new JTextField();
-		panel.add(lnameField);
-		JLabel age = new JLabel("What is your name");
-		panel.add(age);
+		helpPanel_2.add(lnameField);
+		JLabel age = new JLabel("What is your age");
+		helpPanel_2.add(age);
 		JTextField ageField = new JTextField();
-		panel.add(ageField);
+		helpPanel_2.add(ageField);
+		panel_0.add(helpPanel_2);
 
+		JPanel helpPanel_1 = new JPanel();
+		helpPanel_1.setLayout(new BoxLayout(helpPanel_1, BoxLayout.X_AXIS));
 		JButton exit = new JButton("No");
-		panel.add(exit);
+		helpPanel_1.add(exit);
 		JButton next = new JButton("Choose this flight");
-		panel.add(next);
+		helpPanel_1.add(next);
+
 
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				stage_6();
+			}
+		});
+
+		mainPanel.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_BACK_SLASH) {
+					airlinePassengers(airlineChoice);
+				}
 			}
 		});
 
@@ -307,15 +357,34 @@ public final class ReservationClient {
 									"<html>Are all the details you entered correct?\n" + passengerInfo + "If all the" +
 													" " +
 													"information shown is correct select the Yes button below, " +
-													"otherwise, select the No button.<html>", "Confirm",
+													"otherwise, select the No button.</html>", "Confirm",
 									JOptionPane.YES_NO_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
+						getaGate();
+						getdGate();
+						getswGate();
+
 						Gate gate = null;
+						if (airlineChoice.equals(Alaska.name)) {
+							gate = Alaska.gate;
+						} else if (airlineChoice.equals(Delta.name)) {
+							gate = Delta.gate;
+						} else if (airlineChoice.equals(Southwest.name)) {
+							gate = Southwest.gate;
+						}
 
 						BoardingPass pass = new BoardingPass(nameField.getText(), lnameField.getText(), convertedAge,
 										airlineChoice, gate);
 						passenger = new Passenger(nameField.getText(), lnameField.getText(), convertedAge);
 						passenger.addBoardingPass(pass);
+
+						if (airlineChoice.equals(Alaska.name)) {
+							add_aPassenger();
+						} else if (airlineChoice.equals(Delta.name)) {
+							add_dPassenger();
+						} else if (airlineChoice.equals(Southwest.name)) {
+							add_swPassenger();
+						}
 
 						stage_5();
 					}
@@ -327,26 +396,72 @@ public final class ReservationClient {
 			}
 		});
 
-		mainPanel.add(panel, "4");
+		panel_0.add(helpPanel_1);
+		mainPanel.add(panel_0, "4");
 		layout.show(mainPanel, "4");
 	}
 
-	public synchronized void stage_5() {
+	public void stage_5() {
+		getaNumSeat();
+		getdNumSeat();
+		getswNumSeat();
+		Alaska.passenger = getaPassengers();
+		Delta.passenger = getdPassengers();
+		Southwest.passenger = getswPassengers();
+
 		JPanel panel_0 = new JPanel();
 		panel_0.setLayout(new BoxLayout(panel_0, BoxLayout.Y_AXIS));
+		passenger.getPass();
+		passenger.getPass().getGate();
+		passenger.getPass().getGate().getGate();
 
 		JPanel helpPanel_0 = new JPanel();
-		JLabel title = new JLabel("<html>Flight data displaying for " + airlineChoice + "Airlines<br>" +
+		JLabel title = new JLabel("<html><b>Flight data displaying for " + airlineChoice + "Airlines<br>" +
 						"Enjoy " +
 						"your flight!<br>Flight is now boarding at Gate" + passenger.getPass().getGate().getGate() +
-						"</html>");
+						"</b></html>");
 		helpPanel_0.add(title);
 		panel_0.add(helpPanel_0);
 
 		JPanel helpPanel_2 = new JPanel();
-		JTextArea passengerList = new JTextArea();
-		passengerList.setEditable(false);
+		JLabel numOnFlight;
+		if (airlineChoice.equalsIgnoreCase(Alaska.name)) {
+			numOnFlight = new JLabel(Alaska.numSeat);
+		} else if (airlineChoice.equalsIgnoreCase(Delta.name)) {
+			numOnFlight = new JLabel(Delta.numSeat);
+		} else if (airlineChoice.equalsIgnoreCase(Southwest.name)) {
+			numOnFlight = new JLabel(Southwest.numSeat);
+		}
+		panel_0.add(helpPanel_2);
 
+		if (airlineChoice.equals(Alaska.name)) {
+			JTextArea result = new JTextArea();
+			result.setEditable(false);
+			String text = "";
+			for (int i = 0; i < Alaska.passenger.size(); i++) {
+				text = text + Alaska.passenger.get(i).toString() + "\n";
+			}
+			result.setText(text);
+			panel_0.add(result);
+		} else if (airlineChoice.equals(Delta.name)) {
+			JTextArea result = new JTextArea();
+			result.setEditable(false);
+			String text = "";
+			for (int i = 0; i < Delta.passenger.size(); i++) {
+				text = text + Delta.passenger.get(i).toString() + "\n";
+			}
+			result.setText(text);
+			panel_0.add(result);
+		} else if (airlineChoice.equals(Southwest.name)) {
+			JTextArea result = new JTextArea();
+			result.setEditable(false);
+			String text = "";
+			for (int i = 0; i < Southwest.passenger.size(); i++) {
+				text = text + Southwest.passenger.get(i).toString() + "\n";
+			}
+			result.setText(text);
+			panel_0.add(result);
+		}
 
 		JPanel helpPanel_1 = new JPanel();
 		helpPanel_1.setLayout(new BoxLayout(helpPanel_1, BoxLayout.X_AXIS));
@@ -365,7 +480,7 @@ public final class ReservationClient {
 		refresh.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				stage_5();
 			}
 		});
 
@@ -375,11 +490,106 @@ public final class ReservationClient {
 	}
 
 	public void stage_6() {
-		JOptionPane.showMessageDialog(null, "Thank you for using Purdue University Airline Management System!",
-						"Thank you", JOptionPane.INFORMATION_MESSAGE);
+		int i = JOptionPane.showOptionDialog(null, "<html><b>Thank you for using Purdue University Airline " +
+										"Management System!</b></html>",
+						"Thank you", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+
+		if (i == 0) {
+			frame.dispose();
+		}
 	}
 
-	public void add_aPassenger(){
+	public boolean getaNumSeat() {
+		try {
+			socketWriter.write(Alaska.name + "_maxMin");
+			socketWriter.newLine();
+			socketWriter.flush();
+			Alaska.numSeat = socketReader.readLine();
+			String[] split = Alaska.numSeat.split("/");
+			if (split[0].equals(split[1])) {
+				return false;
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return true;
+	}
+
+	public boolean getdNumSeat() {
+		try {
+			socketWriter.write(Delta.name + "_maxMin");
+			socketWriter.newLine();
+			socketWriter.flush();
+			Delta.numSeat = socketReader.readLine();
+			String[] split = Delta.numSeat.split("/");
+			if (split[0].equals(split[1])) {
+				return false;
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return true;
+	}
+
+	public boolean getswNumSeat() {
+		try {
+			socketWriter.write(Southwest.name + "_maxMin");
+			socketWriter.newLine();
+			socketWriter.flush();
+			Southwest.numSeat = socketReader.readLine();
+			String[] split = Southwest.numSeat.split("/");
+			if (split[0].equals(split[1])) {
+				return false;
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return true;
+	}
+
+	public void getaGate() {
+		try {
+			socketWriter.write(Alaska.name + "_gate");
+			socketWriter.newLine();
+			socketWriter.flush();
+			ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
+			Alaska.gate = (Gate) input.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void getdGate() {
+		try {
+			socketWriter.write(Delta.name + "_gate");
+			socketWriter.newLine();
+			socketWriter.flush();
+			ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
+			Delta.gate = (Gate) input.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void getswGate() {
+		try {
+			socketWriter.write(Southwest.name + "_gate");
+			socketWriter.newLine();
+			socketWriter.flush();
+			ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
+			Southwest.gate = (Gate) input.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void add_aPassenger() {
 		try {
 			socketWriter.write(Alaska.name + "_addPassenger");
 			socketWriter.newLine();
@@ -392,7 +602,7 @@ public final class ReservationClient {
 		}
 	}
 
-	public void add_dPassenger(){
+	public void add_dPassenger() {
 		try {
 			socketWriter.write(Delta.name + "_addPassenger");
 			socketWriter.newLine();
@@ -405,7 +615,7 @@ public final class ReservationClient {
 		}
 	}
 
-	public void add_swPassenger(){
+	public void add_swPassenger() {
 		try {
 			socketWriter.write(Delta.name + "_addPassenger");
 			socketWriter.newLine();
@@ -460,7 +670,13 @@ public final class ReservationClient {
 		return null;
 	}
 
-	public synchronized void airlinePassengers(String airlineChoice) {
+	public void airlinePassengers(String airlineChoice) {
+		Alaska.passenger = getaPassengers();
+		Delta.passenger = getdPassengers();
+		Southwest.passenger = getswPassengers();
+		getaNumSeat();
+		getdNumSeat();
+		getswNumSeat();
 		JFrame smallFrame = new JFrame();
 		smallFrame.setSize(300, 300);
 		smallFrame.setLayout(new FlowLayout());
@@ -468,21 +684,44 @@ public final class ReservationClient {
 		JPanel display = new JPanel();
 		JPanel buttonPanel = new JPanel();
 		if (airlineChoice.equals(Alaska.name)) {
-			ReservationServer.getAlaskaInfo();
-			ReservationServer.getAlaskaPassenger();
-			JLabel title = new JLabel("Alaska Airline." + Alaska.numSeat);
+			JLabel title = new JLabel("Alaska Airline." + Alaska.name);
+			JLabel numOnFlight = new JLabel(Alaska.numSeat);
 			JTextArea result = new JTextArea();
+			result.setEditable(false);
 			String text = "";
 			titlePanel.add(title);
 			for (int i = 0; i < Alaska.passenger.size(); i++) {
-				text = text + Alaska.passenger.get(i) + "\n";
+				text = text + Alaska.passenger.get(i).toString() + "\n";
 			}
 			result.setText(text);
+			display.add(numOnFlight);
 			display.add(result);
 		} else if (airlineChoice.equals(Delta.name)) {
-
+			JLabel title = new JLabel("Delta Airline." + Delta.name);
+			JLabel numOnFlight = new JLabel(Delta.numSeat);
+			JTextArea result = new JTextArea();
+			result.setEditable(false);
+			String text = "";
+			titlePanel.add(title);
+			for (int i = 0; i < Delta.passenger.size(); i++) {
+				text = text + Delta.passenger.get(i).toString() + "\n";
+			}
+			result.setText(text);
+			display.add(numOnFlight);
+			display.add(result);
 		} else if (airlineChoice.equals(Southwest.name)) {
-
+			JLabel title = new JLabel("Southwest Airline." + Southwest.name);
+			JLabel numOnFlight = new JLabel(Southwest.numSeat);
+			JTextArea result = new JTextArea();
+			result.setEditable(false);
+			String text = "";
+			titlePanel.add(title);
+			for (int i = 0; i < Southwest.passenger.size(); i++) {
+				text = text + Southwest.passenger.get(i).toString() + "\n";
+			}
+			result.setText(text);
+			display.add(numOnFlight);
+			display.add(result);
 		}
 		JButton exit = new JButton("Exit");
 		exit.addActionListener(new ActionListener() {
@@ -529,43 +768,28 @@ public final class ReservationClient {
 
 					socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 					System.out.println("Connection successful");
+
+					SwingUtilities.invokeLater(new Runnable() {
+						@Override
+						public void run() {
+							frame = new JFrame("Purdue University Flight Reservation System");
+							layout = new CardLayout();
+							mainPanel = new JPanel(layout);
+
+							stage_0();
+							frame.add(mainPanel);
+							frame.setSize(900, 600);
+							frame.setResizable(false);
+							frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+							frame.setResizable(false);
+							frame.setVisible(true);
+						}
+					});
 				} //end if
 			} //end if
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				userInputReader.close();
-
-				if (socketWriter != null) {
-					socketWriter.close();
-				} //end if
-
-				if (socketReader != null) {
-					socketReader.close();
-				} //end if
-			} catch (IOException e) {
-				e.printStackTrace();
-			} //end try catch
-		} //end try catch finally
-
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				frame = new JFrame("Purdue University Flight Reservation System");
-				layout = new CardLayout();
-				mainPanel = new JPanel(layout);
-
-				stage_0();
-
-				frame.add(mainPanel);
-				frame.setSize(900, 600);
-				frame.setResizable(false);
-				frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-				frame.setResizable(false);
-				frame.setVisible(true);
-			}
-		});
+		}
 	}
 
 	public static void main(String[] args) {

@@ -33,8 +33,8 @@ public class Alaska implements Airline {
 	/**
 	 * ArrayList of the passengers on the airplane.
 	 */
-	public static ArrayList<String> alaskaInfo;
-	public static ArrayList<Passenger> passenger;
+	public static ArrayList<String> alaskaInfo = new ArrayList<>();
+	public static ArrayList<Passenger> passenger = new ArrayList<>();
 	/**
 	 * The gate the airline is on.
 	 */

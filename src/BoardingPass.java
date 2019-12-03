@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * BoardingPass class that contains information on the passenger and flight.
  *
  * @author williamwu
  * @version 1.0
  */
-public class BoardingPass {
+public class BoardingPass implements Serializable {
 	private String firstName;
 	private String lastName;
 	private int age;
@@ -23,6 +25,7 @@ public class BoardingPass {
 		this.lastName = lastName;
 		this.age = age;
 		this.airlineName = airlineName;
+		this.gate = gate;
 	}
 
 	/**
@@ -71,6 +74,10 @@ public class BoardingPass {
 	}
 
 	public String toString() {
-		return String.format("");
+		return String.format("BOARDING PASS FOR FLIGHT 18000 WITH %s Airlines%n" +
+						"PASSENGER FIRST NAME: %s&n" +
+						"PASSENGER LAST NAME: %s%n" +
+						"PASSENGER AGE: %d%n" +
+						"You can now begin boarding at gate %s", airlineName, firstName, lastName, age, gate.getGate());
 	}
 }
