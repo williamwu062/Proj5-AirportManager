@@ -27,6 +27,7 @@ public class Southwest implements Airline {
 	/**
 	 * ArrayList of the passengers on the airplane.
 	 */
+	public static ArrayList<Passenger> passengers;
 	public static ArrayList<String> southwestInfo;
 	public static ArrayList<String> passenger;
 	/**
