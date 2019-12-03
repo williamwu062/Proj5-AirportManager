@@ -9,12 +9,10 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class ReservationServer {
-    private String fake;
-
-    public ReservationServer() {
-        Alaska.gate = new Gate();
-        Delta.gate = new Gate();
-        Southwest.gate = new Gate();
+	public ReservationServer() {
+		Alaska.gate = new Gate();
+		Delta.gate = new Gate();
+		Southwest.gate = new Gate();
 
         while (Alaska.gate.getGate().equals(Delta.gate.getGate()) || Alaska.gate.getGate()
                 .equals(Southwest.gate.getGate()) || Delta.gate.getGate().equals(Southwest.gate.getGate())) {
