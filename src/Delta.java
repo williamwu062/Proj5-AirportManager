@@ -31,7 +31,7 @@ public class Delta implements Airline {
 	 */
 	public static ArrayList<Passenger> passengers;
 	public static ArrayList<String> deltaInfo;
-	public static ArrayList<String> passenger;
+	public static ArrayList<Passenger> passenger;
 	/**
 	 * The gate the airline is on.
 	 */

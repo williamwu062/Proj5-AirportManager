@@ -174,43 +174,63 @@ public class ReservationServer {
         }
     }
 
-    public static ArrayList<String> getAlaskaPassenger() {
+    public static void getAlaskaPassenger() {
+		String tempFirst = "";
+		String tempLast = "";
+		int tempAge = 0;
+
         for (int i = 0; i < Alaska.alaskaInfo.size(); i++) {
             if (Alaska.alaskaInfo.get(i).contains(".")) {
-                Alaska.passenger.add(Alaska.alaskaInfo.get(i));
+				tempFirst = Alaska.alaskaInfo.get(i).substring(0, Alaska.alaskaInfo.get(i).indexOf('.'));
+				tempLast = Alaska.alaskaInfo.get(i).substring(Alaska.alaskaInfo.get(i).indexOf('.') + 1,
+						Alaska.alaskaInfo.get(i).indexOf(',')).trim();
+				tempAge = Integer.parseInt(Alaska.alaskaInfo.get(i).substring(Alaska.alaskaInfo.get(i).indexOf(',')+1).trim());
+				Alaska.passenger.add(new Passenger(tempFirst, tempLast, tempAge));
                 Alaska.aSeats--;
                 Alaska.seatCount++;
             }
         }
-        return Alaska.passenger;
     }
 
-    public static ArrayList<String> getDeltaPassenger() {
+    public static void getDeltaPassenger() {
+		String tempFirst = "";
+		String tempLast = "";
+		int tempAge = 0;
+
         for (int i = 0; i < Delta.deltaInfo.size(); i++) {
             if (Delta.deltaInfo.get(i).contains(".")) {
-                Delta.passenger.add(Delta.deltaInfo.get(i));
+				tempFirst = Delta.deltaInfo.get(i).substring(0, Delta.deltaInfo.get(i).indexOf('.'));
+				tempLast = Delta.deltaInfo.get(i).substring(Delta.deltaInfo.get(i).indexOf('.') + 1,
+						Delta.deltaInfo.get(i).indexOf(',')).trim();
+				tempAge = Integer.parseInt(Delta.deltaInfo.get(i).substring(Delta.deltaInfo.get(i).indexOf(',')+1).trim());
+				Delta.passenger.add(new Passenger(tempFirst, tempLast, tempAge));
                 Delta.dSeats--;
                 Delta.seatCount++;
             }
         }
-        return Delta.passenger;
     }
 
-    public static ArrayList<String> getSouthwestPassenger() {
+    public static void getSouthwestPassenger() {
+    	String tempFirst = "";
+    	String tempLast = "";
+    	int tempAge = 0;
         for (int i = 0; i < Southwest.southwestInfo.size(); i++) {
             if (Southwest.southwestInfo.get(i).contains(".")) {
-                Southwest.passenger.add(Southwest.southwestInfo.get(i));
+            	tempFirst = Southwest.southwestInfo.get(i).substring(0, Southwest.southwestInfo.get(i).indexOf('.'));
+            	tempLast = Southwest.southwestInfo.get(i).substring(Southwest.southwestInfo.get(i).indexOf('.') + 1,
+						Southwest.southwestInfo.get(i).indexOf(',')).trim();
+            	tempAge = Integer.parseInt(Southwest.southwestInfo.get(i).substring(Southwest.southwestInfo.get(i).indexOf(',')+1).trim());
+                Southwest.passenger.add(new Passenger(tempFirst, tempLast, tempAge));
                 Southwest.swSeats--;
                 Southwest.seatCount++;
             }
         }
-        return Southwest.passenger;
     }
 
     public static void setAlaskaInfo() {
         ArrayList<String> temp = new ArrayList<>();
         String tempString = "";
-        temp.add(Alaska.passenger.get(Alaska.passenger.size() - 1));
+        temp.add(Alaska.passenger.get(Alaska.passenger.size() - 1).toString());
         temp.add("---------------------ALASKA");
         for (int i = 0; i < temp.size(); i++) {
             Alaska.alaskaInfo.add(temp.get(i));
@@ -229,7 +249,7 @@ public class ReservationServer {
     public static void setDeltaInfo() {
         ArrayList<String> temp = new ArrayList<>();
         String tempString = "";
-        temp.add(Delta.passenger.get(Delta.passenger.size() - 1));
+        temp.add(Delta.passenger.get(Delta.passenger.size() - 1).toString());
         temp.add("---------------------ALASKA");
         for (int i = 0; i < temp.size(); i++) {
             Delta.deltaInfo.add(temp.get(i));
@@ -247,7 +267,7 @@ public class ReservationServer {
     public static void setSouthwestInfo() {
         ArrayList<String> temp = new ArrayList<>();
         String tempString = "";
-        temp.add(Southwest.passenger.get(Southwest.passenger.size() - 1));
+        temp.add(Southwest.passenger.get(Southwest.passenger.size() - 1).toString());
         temp.add("---------------------ALASKA");
         for (int i = 0; i < temp.size(); i++) {
             Southwest.southwestInfo.add(temp.get(i));
