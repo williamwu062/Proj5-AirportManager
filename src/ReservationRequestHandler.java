@@ -15,13 +15,10 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class ReservationRequestHandler implements Runnable {
-	private String fake;
-
 	/**
 	 * The client socket of this request handler.
 	 */ 
 	private Socket clientSocket;
-
 
 	//TODO need prompt if flight is full? Maybe. Yea we need to remove the option from stage 2
 	//TODO check if the text fields are empty in stage 6 I think
@@ -124,4 +121,5 @@ public class ReservationRequestHandler implements Runnable {
 
 		return String.format(format, this.clientSocket);
 	} //toString
+
 }
