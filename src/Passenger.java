@@ -1,8 +1,5 @@
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +7,7 @@ import java.util.ArrayList;
  * @author williamwu
  * @version 1.0
  */
-public class Passenger {
+public class Passenger implements Serializable {
 	private String firstName;
 	private String lastName;
 	private int age;

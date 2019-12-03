@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class ReservationServer {
-	public ReservationServer() {
+	static {
 		Alaska.gate = new Gate();
 		Delta.gate = new Gate();
 		Southwest.gate = new Gate();
@@ -29,8 +29,8 @@ public class ReservationServer {
         getSouthwestPassenger();
     }
 
-    public static ArrayList<String> getAlaskaInfo() {
-        File file = new File("File/reservations.txt");
+    public synchronized static void getAlaskaInfo() {
+        File file = new File("reservations.txt");
 
         try {
             FileReader fr = new FileReader(file);
@@ -58,10 +58,12 @@ public class ReservationServer {
                 }
             }
             bfr.close();
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null,
 					"The file does not exist!", "File not found",
 					JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 		for (int j = 0; j < Alaska.alaskaInfo.size(); j++) {
 			if (Alaska.alaskaInfo.get(j).contains("/")) {
@@ -70,10 +72,9 @@ public class ReservationServer {
 				Alaska.aSeats = Alaska.maxSeats;
 			}
 		}
-        return Alaska.alaskaInfo;
     }
 
-    public static ArrayList<String> getSouthwestInfo() {
+    public synchronized static void getSouthwestInfo() {
         File file = new File("reservations.txt");
 
         try {
@@ -112,11 +113,10 @@ public class ReservationServer {
 				Southwest.swSeats = Southwest.maxSeats;
 			}
 		}
-        return Southwest.southwestInfo;
     }
 
-    public static ArrayList<String> getDeltaInfo() {
-        File file = new File("File/reservations.txt");
+    public synchronized static void getDeltaInfo() {
+        File file = new File("reservations.txt");
 
         try {
             FileReader fr = new FileReader(file);
@@ -154,10 +154,9 @@ public class ReservationServer {
                 Delta.dSeats = Delta.maxSeats;
             }
         }
-        return Delta.deltaInfo;
     }
 
-    public static void changeFile() {
+    public synchronized static void changeFile() {
         File file = new File("reservation.txt");
 
         try (PrintWriter pw = new PrintWriter(file);) {
@@ -177,7 +176,7 @@ public class ReservationServer {
         }
     }
 
-    public static void getAlaskaPassenger() {
+    public synchronized static void getAlaskaPassenger() {
 		String tempFirst = "";
 		String tempLast = "";
 		int tempAge = 0;
@@ -193,10 +192,10 @@ public class ReservationServer {
                 Alaska.seatCount++;
             }
         }
-        Alaska.numSeat = Alaska.seatCount + " / " + Alaska.maxSeats;
+        Alaska.numSeat = Alaska.seatCount + "/" + Alaska.maxSeats;
     }
 
-    public static void getDeltaPassenger() {
+    public synchronized static void getDeltaPassenger() {
 		String tempFirst = "";
 		String tempLast = "";
 		int tempAge = 0;
@@ -213,10 +212,10 @@ public class ReservationServer {
             }
         }
 
-        Delta.numSeat = Delta.seatCount + " / " + Delta.maxSeats;
+        Delta.numSeat = Delta.seatCount + "/" + Delta.maxSeats;
     }
 
-    public static void getSouthwestPassenger() {
+    public synchronized static void getSouthwestPassenger() {
     	String tempFirst = "";
     	String tempLast = "";
     	int tempAge = 0;
@@ -231,10 +230,10 @@ public class ReservationServer {
                 Southwest.seatCount++;
             }
         }
-        Southwest.numSeat = Southwest.seatCount + " / " + Southwest.maxSeats;
+        Southwest.numSeat = Southwest.seatCount + "/" + Southwest.maxSeats;
     }
 
-    public static void setAlaskaInfo() {
+    public synchronized static void setAlaskaInfo() {
         ArrayList<String> temp = new ArrayList<>();
         String tempString = "";
         temp.add(Alaska.passenger.get(Alaska.passenger.size() - 1).toString());
@@ -252,7 +251,7 @@ public class ReservationServer {
         }
     }
 
-    public static void setDeltaInfo() {
+    public synchronized static void setDeltaInfo() {
         ArrayList<String> temp = new ArrayList<>();
         String tempString = "";
         temp.add(Delta.passenger.get(Delta.passenger.size() - 1).toString());
@@ -269,7 +268,7 @@ public class ReservationServer {
         }
     }
 
-    public static void setSouthwestInfo() {
+    public synchronized static void setSouthwestInfo() {
         ArrayList<String> temp = new ArrayList<>();
         String tempString = "";
         temp.add(Southwest.passenger.get(Southwest.passenger.size() - 1).toString());

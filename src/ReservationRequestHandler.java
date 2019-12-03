@@ -32,11 +32,6 @@ public class ReservationRequestHandler implements Runnable {
 		this.clientSocket = clientSocket;
 	} //CensoringRequestHandler
 
-
-	public synchronized void airlinePassengers() {
-
-	}
-
 	@Override
 	public void run() {
 
@@ -46,76 +41,73 @@ public class ReservationRequestHandler implements Runnable {
 			reader = new Scanner(clientSocket.getInputStream());
 			writer = new PrintWriter(clientSocket.getOutputStream());
 
-			ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
-			ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
 
 			while (reader.hasNextLine()) {
 				String s = reader.nextLine();
 				String[] s1 = s.split("_");
 				if (s1[1].equals("Passengers")) {
+					ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
 					if (s1[0].equals(Alaska.name)) {
 						out.writeObject(Alaska.passenger);
+						out.flush();
 					} else if (s1[0].equals(Delta.name)) {
 						out.writeObject(Delta.passenger);
+						out.flush();
 					} else if (s1[0].equals(Southwest.name)) {
 						out.writeObject(Southwest.passenger);
+						out.flush();
 					}
 				}
 
 				if (s1[1].equals("addPassenger")) {
+					ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
 					if (s1[0].equals(Alaska.name)) {
 						Passenger passenger = (Passenger) in.readObject();
-						if (Alaska.aSeats == 0) {
-							writer.write("full");
-						} else {
-							Alaska.passenger.add(passenger);
-							ReservationServer.setAlaskaInfo();
-							ReservationServer.changeFile();
-							writer.write("good");
-						}
+						Alaska.passenger.add(passenger);
+						ReservationServer.setAlaskaInfo();
+						ReservationServer.changeFile();
 					} else if (s1[0].equals(Delta.name)) {
 						Passenger passenger = (Passenger) in.readObject();
-						if (Delta.dSeats == 0) {
-							writer.write("full");
-						} else {
-							Delta.passenger.add(passenger);
-							ReservationServer.setDeltaInfo();
-							ReservationServer.changeFile();
-							writer.write("good");
-						}
+						Delta.passenger.add(passenger);
+						ReservationServer.setDeltaInfo();
+						ReservationServer.changeFile();
 					} else if (s1[0].equals(Southwest.name)) {
 						Passenger passenger = (Passenger) in.readObject();
-						if (Southwest.swSeats == 0) {
-							writer.write("full");
-						} else {
-							Southwest.passenger.add(passenger);
-							ReservationServer.setSouthwestInfo();
-							ReservationServer.changeFile();
-							writer.write("good");
-						}
+						Southwest.passenger.add(passenger);
+						ReservationServer.setSouthwestInfo();
+						ReservationServer.changeFile();
 					}
 				}
 
 				if (s1[1].equals("maxMin")) {
 					if (s1[0].equals(Alaska.name)) {
-						writer.write(Alaska.numSeat);
+						writer.println(Alaska.numSeat);
+						writer.flush();
 					} else if (s1[0].equals(Delta.name)) {
-						writer.write(Delta.numSeat);
+						writer.println(Delta.numSeat);
+						writer.flush();
 					} else if (s1[0].equals(Southwest.name)) {
-						writer.write(Southwest.numSeat);
+						writer.println(Southwest.numSeat);
+						writer.flush();
 					}
 				}
 
+				if (s1[1].equals("gate")) {
+					ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+					if (s1[0].equals(Alaska.name)) {
+						out.writeObject(Alaska.gate);
+						out.flush();
+					} else if (s1[0].equals(Delta.name)) {
+						out.writeObject(Delta.gate);
+						out.flush();
+					} else if (s1[0].equals(Southwest.name)) {
+						out.writeObject(Southwest.gate);
+						out.flush();
+					}
+				}
 			}
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		} finally {
-			if (writer != null) {
-				writer.close();
-			}
-			if (reader != null) {
-				reader.close();
-			}
 		}
 	} //run
 
