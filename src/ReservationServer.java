@@ -114,7 +114,7 @@ public class ReservationServer {
     }
 
     public static ArrayList<String> getDeltaInfo() {
-        File file = new File("reservations.txt");
+        File file = new File("File/reservations.txt");
 
         try {
             FileReader fr = new FileReader(file);
