@@ -131,5 +131,5 @@ public class ReservationRequestHandler implements Runnable {
 
 		return String.format(format, this.clientSocket);
 	} //toString
-	
+
 }

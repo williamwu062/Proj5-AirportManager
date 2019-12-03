@@ -458,6 +458,44 @@ public final class ReservationClient {
 		return null;
 	}
 
+	public synchronized void airlinePassengers(String airlineChoice) {
+		JFrame smallFrame = new JFrame();
+		smallFrame.setSize(300, 300);
+		smallFrame.setLayout(new FlowLayout());
+		JPanel titlePanel = new JPanel();
+		JPanel display = new JPanel();
+		JPanel buttonPanel = new JPanel();
+		if (airlineChoice.equals(Alaska.name)) {
+			ReservationServer.getAlaskaInfo();
+			ReservationServer.getAlaskaPassenger();
+			JLabel title = new JLabel("Alaska Airline." + Alaska.numSeat);
+			JTextArea result = new JTextArea();
+			String text = "";
+			titlePanel.add(title);
+			for (int i = 0; i < Alaska.passenger.size(); i++) {
+				text = text + Alaska.passenger.get(i) + "\n";
+			}
+			result.setText(text);
+			display.add(result);
+		} else if (airlineChoice.equals(Delta.name)) {
+
+		} else if (airlineChoice.equals(Southwest.name)) {
+
+		}
+		JButton exit = new JButton("Exit");
+		exit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				smallFrame.dispose();
+			}
+		});
+		buttonPanel.add(exit);
+		smallFrame.add(titlePanel);
+		smallFrame.add(display);
+		smallFrame.add(buttonPanel);
+		smallFrame.setVisible(true);
+	}
+
 
 	public ReservationClient() {
 		try {
