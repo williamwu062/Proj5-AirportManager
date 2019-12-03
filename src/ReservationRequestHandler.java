@@ -65,6 +65,16 @@ public class ReservationRequestHandler implements Runnable {
 					}
  				}
 
+				if (s1[1].equals("addPassenger")) {
+					if(s1[0].equals(Alaska.name)) {
+
+					} else if (s1[0].equals(Delta.name)) {
+
+					} else if (s1[0].equals(Southwest.name)) {
+
+					}
+				}
+
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -121,5 +131,5 @@ public class ReservationRequestHandler implements Runnable {
 
 		return String.format(format, this.clientSocket);
 	} //toString
-
+	
 }

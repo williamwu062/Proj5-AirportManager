@@ -377,6 +377,45 @@ public final class ReservationClient {
 						"Thank you", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	public void addaPassenger(){
+		try {
+			socketWriter.write(Alaska.name + "_addPassenger");
+			socketWriter.newLine();
+			socketWriter.flush();
+			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+			out.writeObject(passenger);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void adddPassenger(){
+		try {
+			socketWriter.write(Delta.name + "_addPassenger");
+			socketWriter.newLine();
+			socketWriter.flush();
+			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+			out.writeObject(passenger);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void addswPassenger(){
+		try {
+			socketWriter.write(Delta.name + "_addPassenger");
+			socketWriter.newLine();
+			socketWriter.flush();
+			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+			out.writeObject(passenger);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public ArrayList<Passenger> getaPassengers() {
 		try {
 			socketWriter.write(Alaska.name + "_Passengers");
