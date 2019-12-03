@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class ReservationServer {
+	private String fake;
 
 	public ReservationServer() {
 		Alaska.gate = new Gate();

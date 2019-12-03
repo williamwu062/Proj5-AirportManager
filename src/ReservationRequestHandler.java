@@ -15,9 +15,11 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class ReservationRequestHandler implements Runnable {
+	private String fake;
+
 	/**
 	 * The client socket of this request handler.
-	 */
+	 */ 
 	private Socket clientSocket;
 
 

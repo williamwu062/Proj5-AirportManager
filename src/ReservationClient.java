@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public final class ReservationClient {
+	private String fake;
 	private static BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
 	private static String hostname;
 	private static String portString;
