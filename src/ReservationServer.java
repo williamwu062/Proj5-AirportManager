@@ -67,6 +67,7 @@ public class ReservationServer {
 			if (Alaska.alaskaInfo.get(j).contains("/")) {
 				Alaska.maxSeats = Integer.parseInt(Alaska.alaskaInfo.get
 						(j).substring(Alaska.alaskaInfo.get(j).indexOf('/') + 1));
+				Alaska.aSeats = Alaska.maxSeats;
 			}
 		}
         return Alaska.alaskaInfo;
@@ -108,6 +109,7 @@ public class ReservationServer {
 		for (int j = 0; j < Southwest.southwestInfo.size(); j++) {
 			if (Southwest.southwestInfo.get(j).contains("/")) {
 				Southwest.maxSeats = Integer.parseInt(Southwest.southwestInfo.get(j).substring(Southwest.southwestInfo.get(j).indexOf('/') + 1));
+				Southwest.swSeats = Southwest.maxSeats;
 			}
 		}
         return Southwest.southwestInfo;
@@ -149,6 +151,7 @@ public class ReservationServer {
         for (int j = 0; j < Delta.deltaInfo.size(); j++) {
             if (Delta.deltaInfo.get(j).contains("/")) {
                 Delta.maxSeats = Integer.parseInt(Delta.deltaInfo.get(j).substring(Delta.deltaInfo.get(j).indexOf('/') + 1));
+                Delta.dSeats = Delta.maxSeats;
             }
         }
         return Delta.deltaInfo;
@@ -190,6 +193,7 @@ public class ReservationServer {
                 Alaska.seatCount++;
             }
         }
+        Alaska.numSeat = Alaska.seatCount + " / " + Alaska.maxSeats;
     }
 
     public static void getDeltaPassenger() {
@@ -208,6 +212,8 @@ public class ReservationServer {
                 Delta.seatCount++;
             }
         }
+
+        Delta.numSeat = Delta.seatCount + " / " + Delta.maxSeats;
     }
 
     public static void getSouthwestPassenger() {
@@ -225,6 +231,7 @@ public class ReservationServer {
                 Southwest.seatCount++;
             }
         }
+        Southwest.numSeat = Southwest.seatCount + " / " + Southwest.maxSeats;
     }
 
     public static void setAlaskaInfo() {
@@ -240,7 +247,6 @@ public class ReservationServer {
             if (Alaska.alaskaInfo.get(j).contains("/")) {
                 tempString = Alaska.seatCount + Alaska.alaskaInfo.get(j).substring(Alaska.alaskaInfo.get(j).indexOf('/'));
                 Alaska.maxSeats = Integer.parseInt(Alaska.alaskaInfo.get(j).substring(Alaska.alaskaInfo.get(j).indexOf('/') + 1));
-                Alaska.numSeat = tempString;
                 Alaska.alaskaInfo.set(j, tempString);
             }
         }
@@ -258,7 +264,6 @@ public class ReservationServer {
         for (int j = 0; j < Delta.deltaInfo.size(); j++) {
             if (Delta.deltaInfo.get(j).contains("/")) {
                 tempString = Delta.seatCount + Delta.deltaInfo.get(j).substring(Delta.deltaInfo.get(j).indexOf('/'));
-                Delta.numSeat = tempString;
                 Delta.deltaInfo.set(j, tempString);
             }
         }
@@ -276,7 +281,6 @@ public class ReservationServer {
         for (int j = 0; j < Southwest.southwestInfo.size(); j++) {
             if (Southwest.southwestInfo.get(j).contains("/")) {
                 tempString = Southwest.seatCount + Southwest.southwestInfo.get(j).substring(Southwest.southwestInfo.get(j).indexOf('/'));
-                Southwest.numSeat = tempString;
                 Southwest.southwestInfo.set(j, tempString);
             }
         }
