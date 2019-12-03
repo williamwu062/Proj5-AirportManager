@@ -468,14 +468,13 @@ public final class ReservationClient {
 		JPanel display = new JPanel();
 		JPanel buttonPanel = new JPanel();
 		if (airlineChoice.equals(Alaska.name)) {
-			ReservationServer.getAlaskaInfo();
-			ReservationServer.getAlaskaPassenger();
+			Alaska.passenger = getaPassengers();
 			JLabel title = new JLabel("Alaska Airline." + Alaska.numSeat);
 			JTextArea result = new JTextArea();
 			String text = "";
 			titlePanel.add(title);
 			for (int i = 0; i < Alaska.passenger.size(); i++) {
-				text = text + Alaska.passenger.get(i) + "\n";
+				text = text + Alaska.passenger.get(i).toString() + "\n";
 			}
 			result.setText(text);
 			display.add(result);
