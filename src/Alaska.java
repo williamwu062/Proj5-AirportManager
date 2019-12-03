@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Class for Alaskan Airlines.
  *
- * @author williamwu
+ * @author williamwu, Benjamin Zhu
  * @version 1.0
  */
 public class Alaska implements Airline {

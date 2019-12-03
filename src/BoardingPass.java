@@ -3,7 +3,7 @@ import java.io.Serializable;
 /**
  * BoardingPass class that contains information on the passenger and flight.
  *
- * @author williamwu
+ * @author williamwu, Benjamin
  * @version 1.0
  */
 public class BoardingPass implements Serializable {
@@ -75,9 +75,10 @@ public class BoardingPass implements Serializable {
 
 	public String toString() {
 		return String.format("BOARDING PASS FOR FLIGHT 18000 WITH %s Airlines%n" +
-						"PASSENGER FIRST NAME: %s&n" +
+						"PASSENGER FIRST NAME: %s%n" +
 						"PASSENGER LAST NAME: %s%n" +
 						"PASSENGER AGE: %d%n" +
-						"You can now begin boarding at gate %s", airlineName, firstName, lastName, age, gate.getGate());
+						"You can now begin boarding at gate %s",
+				airlineName, firstName, lastName, age, gate.getGate());
 	}
 }

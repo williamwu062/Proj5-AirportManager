@@ -8,11 +8,12 @@ import java.util.ArrayList;
 /**
  * Client class where the user can buy a ticket if one is still available.
  *
- * @author williamwu
+ * @author williamwu, Benjamin Zhu
  * @version 1.0
  */
 public final class ReservationClient {
-	private static BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
+	private static BufferedReader userInputReader =
+			new BufferedReader(new InputStreamReader(System.in));
 	private static String hostname;
 	private static String portString;
 	private static int port;
@@ -49,7 +50,8 @@ public final class ReservationClient {
 		panel_0.add(helpPanel_0);
 
 		JPanel helpPanel_image = new JPanel();
-		JLabel imageWelcome = new JLabel(new ImageIcon((new ImageIcon("Images/Purdue_Boilermakers_logo.svg.png"))
+		JLabel imageWelcome = new JLabel(new ImageIcon((new ImageIcon
+				("Images/Purdue_Boilermakers_logo.svg.png"))
 						.getImage().getScaledInstance(400, 300, 4)));
 		helpPanel_image.add(imageWelcome);
 		panel_0.add(helpPanel_image);
@@ -416,7 +418,7 @@ public final class ReservationClient {
 		passenger.getPass().getGate().getGate();
 
 		JPanel helpPanel_0 = new JPanel();
-		JLabel title = new JLabel("<html><b>Flight data displaying for " + airlineChoice + "Airlines<br>" +
+		JLabel title = new JLabel("<html><b>Flight data displaying for " + airlineChoice + " Airlines<br>" +
 						"Enjoy " +
 						"your flight!<br>Flight is now boarding at Gate" + passenger.getPass().getGate().getGate() +
 						"</b></html>");
@@ -434,15 +436,26 @@ public final class ReservationClient {
 		}
 		panel_0.add(helpPanel_2);
 
+		String boarding = "";
+		JPanel helpPanel_3 = new JPanel();
+		helpPanel_3.setLayout(new BoxLayout(helpPanel_3, BoxLayout.X_AXIS));
+		JLabel boardingPass = new JLabel();
+		boardingPass.setSize(300,200);
+		helpPanel_3.setSize(300, 200);
 		if (airlineChoice.equals(Alaska.name)) {
 			JTextArea result = new JTextArea();
 			result.setEditable(false);
+			result.setSize(300, 300);
 			String text = "";
 			for (int i = 0; i < Alaska.passenger.size(); i++) {
 				text = text + Alaska.passenger.get(i).toString() + "\n";
 			}
 			result.setText(text);
 			panel_0.add(result);
+			boarding = Passenger.getPass().toString();
+			boardingPass.setText(boarding);
+			helpPanel_2.add(boardingPass);
+			panel_0.add(helpPanel_3);
 		} else if (airlineChoice.equals(Delta.name)) {
 			JTextArea result = new JTextArea();
 			result.setEditable(false);
@@ -452,6 +465,10 @@ public final class ReservationClient {
 			}
 			result.setText(text);
 			panel_0.add(result);
+			boarding = Passenger.getPass().toString();
+			boardingPass.setText(boarding);
+			helpPanel_2.add(boardingPass);
+			panel_0.add(helpPanel_3);
 		} else if (airlineChoice.equals(Southwest.name)) {
 			JTextArea result = new JTextArea();
 			result.setEditable(false);
@@ -461,6 +478,10 @@ public final class ReservationClient {
 			}
 			result.setText(text);
 			panel_0.add(result);
+			boarding = Passenger.getPass().toString();
+			boardingPass.setText(boarding);
+			helpPanel_2.add(boardingPass);
+			panel_0.add(helpPanel_3);
 		}
 
 		JPanel helpPanel_1 = new JPanel();
@@ -480,6 +501,7 @@ public final class ReservationClient {
 		refresh.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ReservationServer.changeFile();;
 				stage_5();
 			}
 		});

@@ -3,7 +3,7 @@ import java.util.Random;
 
 /**
  * The Gate class describes the terminal and number of a flight.
- * @author williamwu
+ * @author williamwu, Benjamin Zhu
  * @version 1.0
  */
 public class Gate implements Serializable {

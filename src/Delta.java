@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Class for the Delta airline.
  *
- * @author williamwu
+ * @author williamwu, Benjamin Zhu
  * @version 1.0
  */
 public class Delta implements Airline {

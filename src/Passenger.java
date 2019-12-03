@@ -11,7 +11,7 @@ public class Passenger implements Serializable {
 	private String firstName;
 	private String lastName;
 	private int age;
-	private BoardingPass pass;
+	private static BoardingPass pass;
 
 	/**
 	 * Initializes fields.
@@ -61,7 +61,7 @@ public class Passenger implements Serializable {
 	 * Gets the boarding pass
 	 * @return boarding pass
 	 */
-	public BoardingPass getPass() {
+	public static BoardingPass getPass() {
 		return pass;
 	}
 

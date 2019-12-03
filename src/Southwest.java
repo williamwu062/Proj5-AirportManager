@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Class describing the Southwest airline.
  *
- * @author williamwu
+ * @author williamwu, Benjamin Zhu
  * @version 1.0
  */
 public class Southwest implements Airline {

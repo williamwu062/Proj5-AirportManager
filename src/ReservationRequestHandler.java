@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * @author williamwu
+ * @author williamwu, Benjamin Zhu
  * @version 1.0
  */
 public class ReservationRequestHandler implements Runnable {
