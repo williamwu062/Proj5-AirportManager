@@ -150,6 +150,7 @@ public final class ReservationClient {
 		JPanel panel_0 = new JPanel();
 		panel_0.setLayout(new BoxLayout(panel_0, BoxLayout.Y_AXIS));
 		panel_0.setFocusable(true);
+		mainPanel.requestFocus();
 
 		JPanel helpPanel_0 = new JPanel();
 		JLabel title = new JLabel("<html><b>Choose a Flight</b></html>");
@@ -181,6 +182,7 @@ public final class ReservationClient {
 			public void itemStateChanged(ItemEvent e) {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					mainParagraph.setText(descriptions[airlines.getSelectedIndex()]);
+					mainPanel.requestFocus();
 				}
 			}
 		});
@@ -192,11 +194,11 @@ public final class ReservationClient {
 			}
 		});
 
-		panel_0.addKeyListener(new KeyAdapter() {
+		mainPanel.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_BACK_SLASH) {
-					JOptionPane.showMessageDialog(null, "Hi", "title", JOptionPane.ERROR_MESSAGE);
+					airlinePassengers("Alaska");
 				}
 			}
 		});
@@ -377,7 +379,7 @@ public final class ReservationClient {
 						"Thank you", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	public void addaPassenger(){
+	public void add_aPassenger(){
 		try {
 			socketWriter.write(Alaska.name + "_addPassenger");
 			socketWriter.newLine();
@@ -390,7 +392,7 @@ public final class ReservationClient {
 		}
 	}
 
-	public void adddPassenger(){
+	public void add_dPassenger(){
 		try {
 			socketWriter.write(Delta.name + "_addPassenger");
 			socketWriter.newLine();
@@ -403,7 +405,7 @@ public final class ReservationClient {
 		}
 	}
 
-	public void addswPassenger(){
+	public void add_swPassenger(){
 		try {
 			socketWriter.write(Delta.name + "_addPassenger");
 			socketWriter.newLine();
