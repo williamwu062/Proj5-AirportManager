@@ -1,10 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
@@ -17,7 +14,7 @@ import java.util.Scanner;
 public class ReservationRequestHandler implements Runnable {
 	/**
 	 * The client socket of this request handler.
-	 */ 
+	 */
 	private Socket clientSocket;
 
 	//TODO need prompt if flight is full? Maybe. Yea we need to remove the option from stage 2
@@ -36,7 +33,6 @@ public class ReservationRequestHandler implements Runnable {
 	} //CensoringRequestHandler
 
 
-
 	public synchronized void airlinePassengers() {
 
 	}
@@ -51,32 +47,67 @@ public class ReservationRequestHandler implements Runnable {
 			writer = new PrintWriter(clientSocket.getOutputStream());
 
 			ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+			ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
 
 			while (reader.hasNextLine()) {
 				String s = reader.nextLine();
-				String[] s1  = s.split("_");
+				String[] s1 = s.split("_");
 				if (s1[1].equals("Passengers")) {
-					if(s1[0].equals(Alaska.name)) {
+					if (s1[0].equals(Alaska.name)) {
 						out.writeObject(Alaska.passenger);
 					} else if (s1[0].equals(Delta.name)) {
 						out.writeObject(Delta.passenger);
 					} else if (s1[0].equals(Southwest.name)) {
 						out.writeObject(Southwest.passenger);
 					}
- 				}
+				}
 
 				if (s1[1].equals("addPassenger")) {
-					if(s1[0].equals(Alaska.name)) {
-
+					if (s1[0].equals(Alaska.name)) {
+						Passenger passenger = (Passenger) in.readObject();
+						if (Alaska.aSeats == 0) {
+							writer.write("full");
+						} else {
+							Alaska.passenger.add(passenger);
+							ReservationServer.setAlaskaInfo();
+							ReservationServer.changeFile();
+							writer.write("good");
+						}
 					} else if (s1[0].equals(Delta.name)) {
-
+						Passenger passenger = (Passenger) in.readObject();
+						if (Delta.dSeats == 0) {
+							writer.write("full");
+						} else {
+							Delta.passenger.add(passenger);
+							ReservationServer.setDeltaInfo();
+							ReservationServer.changeFile();
+							writer.write("good");
+						}
 					} else if (s1[0].equals(Southwest.name)) {
+						Passenger passenger = (Passenger) in.readObject();
+						if (Southwest.swSeats == 0) {
+							writer.write("full");
+						} else {
+							Southwest.passenger.add(passenger);
+							ReservationServer.setSouthwestInfo();
+							ReservationServer.changeFile();
+							writer.write("good");
+						}
+					}
+				}
 
+				if (s1[1].equals("maxMin")) {
+					if (s1[0].equals(Alaska.name)) {
+						writer.write(Alaska.numSeat);
+					} else if (s1[0].equals(Delta.name)) {
+						writer.write(Delta.numSeat);
+					} else if (s1[0].equals(Southwest.name)) {
+						writer.write(Southwest.numSeat);
 					}
 				}
 
 			}
-		} catch (IOException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			if (writer != null) {
